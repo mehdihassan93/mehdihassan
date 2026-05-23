@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mehdi Hassan // Android & AI Engineer // Resume</title>
+  
+  <!-- Premium Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet"/>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    body {
+      font-family: 'Hanken Grotesk', sans-serif;
+      color: #1e293b;
+      background-color: #f8fafc;
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+    
+    .tech-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      border: 1px solid #cbd5e1;
+      padding: 3px 8px;
+      border-radius: 3px;
+      background-color: #f1f5f9;
+      color: #334155;
+    }
+    
+    /* Printable styling rules */
+    @media print {
+      body {
+        background-color: #ffffff;
+        color: #000000;
+        font-size: 12px;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-border {
+        border-color: #000000 !important;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+      .tech-pill {
+        border-color: #64748b !important;
+        background-color: #ffffff !important;
+        color: #000000 !important;
+      }
+    }
+  </style>
+</head>
+<body class="p-6 md:p-12">
+
+  <!-- Interactive Top Bar (Non-printable) -->
+  <div class="max-w-4xl mx-auto mb-8 flex justify-between items-center no-print bg-white p-4 rounded shadow-sm border border-slate-200">
+    <div class="text-xs text-slate-500 font-medium">
+      <span>TRANSMISSION CORE READY // RESOLUTION SECURE</span>
+    </div>
+    <div class="flex gap-4">
+      <button onclick="window.print()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-widest rounded transition-all">
+        Print / Save PDF
+      </button>
+      <button onclick="window.close()" class="px-4 py-2 border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold uppercase tracking-widest rounded transition-all">
+        Back to Studio
+      </button>
+    </div>
+  </div>
+
+  <!-- Main CV Container -->
+  <div class="max-w-4xl mx-auto bg-white p-8 md:p-16 border border-slate-200 rounded print:border-none print:p-0">
+    
+    <!-- Header -->
+    <header class="border-b-2 border-slate-900 pb-6 mb-8 print-border">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">MEHDI HASSAN</h1>
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-slate-500 mt-2 font-medium">Android &amp; AI Engineer</p>
+        </div>
+        
+        <!-- Contact details -->
+        <div class="flex flex-col text-left md:text-right font-mono text-[11px] text-slate-600 gap-1 leading-relaxed">
+          <span>London, UK // +44 7436 371606</span>
+          <span><a href="mailto:mehdihassan22@gmail.com" class="hover:underline">mehdihassan22@gmail.com</a></span>
+          <span><a href="https://mehdi-hassan.com" target="_blank" class="hover:underline">mehdi-hassan.com</a></span>
+          <span><a href="https://www.linkedin.com/in/mehdihassan93/" target="_blank" class="hover:underline">linkedin/mehdihassan93</a></span>
+          <span><a href="https://github.com/mehdihassan93/" target="_blank" class="hover:underline">github/mehdihassan93</a></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Summary -->
+    <section class="mb-10">
+      <h2 class="text-lg font-bold uppercase tracking-wider text-slate-900 mb-3 border-b border-slate-200 pb-1">Professional Profile</h2>
+      <p class="text-slate-700 leading-relaxed text-sm md:text-base">
+        Android engineer with 5+ years building production mobile applications across native Android (Kotlin, Jetpack Compose) and Flutter. Currently shipping customer-facing features at Flyinbird in London. Interested in integrating on-device AI and ML into mobile experiences.
+      </p>
+    </section>
+
+    <!-- Core Skills -->
+    <section class="mb-10">
+      <h2 class="text-lg font-bold uppercase tracking-wider text-slate-900 mb-4 border-b border-slate-200 pb-1">Technical Stack</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 text-sm leading-relaxed">
+        
+        <div class="flex flex-col gap-1.5">
+          <div class="flex gap-2 items-baseline">
+            <span class="font-semibold text-slate-800 shrink-0 w-24">Languages:</span>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="tech-pill">Kotlin</span>
+              <span class="tech-pill">Dart</span>
+              <span class="tech-pill">Java</span>
+              <span class="tech-pill">Swift</span>
+              <span class="tech-pill">JavaScript</span>
+              <span class="tech-pill">Python</span>
+            </div>
+          </div>
+          
+          <div class="flex gap-2 items-baseline mt-1">
+            <span class="font-semibold text-slate-800 shrink-0 w-24">Android:</span>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="tech-pill">Jetpack Compose</span>
+              <span class="tech-pill">MVVM</span>
+              <span class="tech-pill">Coroutines</span>
+              <span class="tech-pill">Flow</span>
+              <span class="tech-pill">Hilt</span>
+              <span class="tech-pill">Room</span>
+              <span class="tech-pill">WorkManager</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <div class="flex gap-2 items-baseline">
+            <span class="font-semibold text-slate-800 shrink-0 w-24">Cross-Platform:</span>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="tech-pill">Flutter</span>
+              <span class="tech-pill">SwiftUI</span>
+            </div>
+          </div>
+          
+          <div class="flex gap-2 items-baseline mt-1">
+            <span class="font-semibold text-slate-800 shrink-0 w-24">AI / ML:</span>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="tech-pill">TensorFlow Lite</span>
+              <span class="tech-pill">MediaPipe</span>
+              <span class="tech-pill">ML Kit</span>
+              <span class="tech-pill">Inference</span>
+            </div>
+          </div>
+
+          <div class="flex gap-2 items-baseline mt-1">
+            <span class="font-semibold text-slate-800 shrink-0 w-24">Backend:</span>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="tech-pill">Firebase</span>
+              <span class="tech-pill">REST APIs</span>
+              <span class="tech-pill">MongoDB</span>
+              <span class="tech-pill">Node.js</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="mb-10">
+      <h2 class="text-lg font-bold uppercase tracking-wider text-slate-900 mb-6 border-b border-slate-200 pb-1">Professional History</h2>
+      <div class="flex flex-col gap-8">
+        
+        <!-- Flyinbird -->
+        <div>
+          <div class="flex justify-between items-baseline mb-2">
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Android Developer</h3>
+              <span class="text-slate-600 font-medium text-xs">Flyinbird // London, UK (Hybrid)</span>
+            </div>
+            <span class="font-mono text-xs text-slate-500">Feb 2024 — Present</span>
+          </div>
+          <ul class="list-disc list-outside ml-5 text-slate-700 text-sm space-y-1.5 leading-relaxed">
+            <li>Ship customer-facing Android features in Kotlin and Jetpack Compose for a production application used across the UK.</li>
+            <li>Improved application performance and frame stability through systematic refactoring and Crashlytics-driven prioritization.</li>
+            <li>Contribute to architectural decisions around state management, navigation, and modularization; lead code reviews and mentor on Compose adoption.</li>
+          </ul>
+        </div>
+
+        <!-- Aideon -->
+        <div>
+          <div class="flex justify-between items-baseline mb-2">
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Flutter Android Developer</h3>
+              <span class="text-slate-600 font-medium text-xs">Aideon Limited // London, UK (On-site)</span>
+            </div>
+            <span class="font-mono text-xs text-slate-500">Dec 2022 — Dec 2023</span>
+          </div>
+          <ul class="list-disc list-outside ml-5 text-slate-700 text-sm space-y-1.5 leading-relaxed">
+            <li>Built and maintained cross-platform mobile applications in Flutter/Dart with a focus on Android performance and UX.</li>
+            <li>Implemented complex UI flows, custom animations, and integrated REST APIs, Firebase services, and push notifications.</li>
+            <li>Translated Figma prototypes into pixel-accurate, accessible interfaces in partnership with product and design.</li>
+          </ul>
+        </div>
+
+        <!-- EGuidanceLabs -->
+        <div>
+          <div class="flex justify-between items-baseline mb-2">
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Associate Flutter Developer</h3>
+              <span class="text-slate-600 font-medium text-xs">EGuidanceLabs // Kochi, India</span>
+            </div>
+            <span class="font-mono text-xs text-slate-500">Jun 2021 — Jul 2022</span>
+          </div>
+          <ul class="list-disc list-outside ml-5 text-slate-700 text-sm space-y-1.5 leading-relaxed">
+            <li>Developed cross-platform Flutter applications for clients across SaaS and education verticals.</li>
+            <li>Built reusable, high-fidelity UI component libraries and managed full product deployment lifecycle to Play Store / App Store release.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="mb-10">
+      <h2 class="text-lg font-bold uppercase tracking-wider text-slate-900 mb-4 border-b border-slate-200 pb-1">Education</h2>
+      <div class="flex flex-col gap-4">
+        
+        <div class="flex justify-between items-baseline">
+          <div>
+            <h3 class="text-sm font-bold text-slate-900">University of Roehampton</h3>
+            <span class="text-slate-600 text-xs">MSc Web Development [Merit]</span>
+          </div>
+          <span class="font-mono text-xs text-slate-500">Sep 2022 — Oct 2023</span>
+        </div>
+
+        <div class="flex justify-between items-baseline">
+          <div>
+            <h3 class="text-sm font-bold text-slate-900">APJ Abdul Kalam Technological University</h3>
+            <span class="text-slate-600 text-xs">BTech in Computer Science &amp; Engineering</span>
+          </div>
+          <span class="font-mono text-xs text-slate-500">2016 — 2020</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Projects & Certifications -->
+    <section>
+      <h2 class="text-lg font-bold uppercase tracking-wider text-slate-900 mb-4 border-b border-slate-200 pb-1">Projects &amp; Certifications</h2>
+      <div class="text-sm leading-relaxed text-slate-700 flex flex-col gap-3">
+        <div>
+          <span class="font-semibold text-slate-800">network_kit:</span>
+          <span>A lightweight Flutter package published on pub.dev designed to streamline and modularize Dart mobile HTTP request networking layers.</span>
+        </div>
+        <div>
+          <span class="font-semibold text-slate-800">Certifications:</span>
+          <span>Certified Ethical Hacker (CEH Udemy), Advanced Flutter Development Bootcamp with Dart, React JS Portfolio.</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+# ==========================================
+# ROBOTS.TXT // MEHDI HASSAN PORTFOLIO
+# ==========================================
+
+User-agent: *
+Allow: /
+Disallow: /src/
+
+# Sitemaps (Update with your official custom domain if applicable)
+Sitemap: https://mehdihassan.github.io/sitemap.xml
+
+# AI / LLM Agent Citations Optimization (Agentic SEO)
+# Allow AI search crawlers to scan for recruiting and expertise queries
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /

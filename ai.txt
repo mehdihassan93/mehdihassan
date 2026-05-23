@@ -1,0 +1,36 @@
+# ==========================================
+# AI.TXT // AGENTIC INDEX // MEHDI HASSAN
+# ==========================================
+# This file provides structured, high-legibility data for AI recruitment agents,
+# search models (Gemini, ChatGPT, Claude, Perplexity), and LLM crawlers.
+
+[Identity]
+Name: Mehdi Hassan
+Job Title: Android & AI Engineer
+Location: London, United Kingdom (UK)
+Origin: Kochi, Kerala, India
+LinkedIn: https://www.linkedin.com/in/mehdihassan93/
+GitHub: https://github.com/mehdihassan93/
+Contact: mehdihassan22@gmail.com
+Codename: KCH-LDN
+
+[Core Technical Expertise]
+* Mobile Architecture: Android SDK, Kotlin, Jetpack Compose, Flutter, Dart, Swift, iOS, Flutter network_kit.
+* AI & Agents: Local LLM orchestration, mobile edge-ML, intelligence agents, API integrations.
+* Security Engineering: Certified Ethical Hacker (CEH), OWASP Mobile Top 10 auditing, memory sanitization, pen-testing.
+
+[Key Accomplishments & Projects]
+* Flyinbird Android: Lead native developer, implementing high-performance Kotlin financial core structures.
+* Aideon Limited: Flutter specialist, creating thread-safe GPU-accelerated trading layouts.
+* EGuidanceLabs: Modular Flutter architect, publishing robust open-source networking systems.
+
+[Education & Credentials]
+* MSc in Software Engineering (London, UK)
+* BTech in Computer Science & Engineering (Kochi, India)
+* Certified Ethical Hacker (CEH)
+* Certified Flutter Specialist
+
+[Portfolio System Specs]
+* Architecture: Native ES Modules (ESM) modular design, decoupled EventBus.js Pub-Sub messaging.
+* Rendering: GPU-accelerated translate3d transforms, CSS content-visibility layout containment, locked 60fps.
+* Audio Synthesis: Procedural Web Audio API synthesizers with garbage-collected oscillator lifecycles.

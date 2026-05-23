@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Mehdi Hassan // Android & AI Engineer // Portfolio</title>
+  
+  <!-- Real-time Diagnostic Error Overlay -->
+  <script>
+    window.addEventListener('error', function(e) {
+      var errBox = document.createElement('div');
+      errBox.style.cssText = 'position:fixed;top:0;left:0;width:100%;z-index:100000;background:#ffb4ab;color:#690005;font-family:monospace;padding:24px;font-size:14px;line-height:1.6;border-bottom:3px solid #ff5449;word-break:break-all;box-shadow:0 4px 12px rgba(0,0,0,0.5);';
+      errBox.innerHTML = '<div style="font-weight:bold;font-size:16px;margin-bottom:8px;">⚠️ RUNTIME CRASH DETECTED:</div>' +
+                         '<strong>Message:</strong> ' + e.message + '<br/>' +
+                         '<strong>Source:</strong> ' + e.filename + '<br/>' +
+                         '<strong>Line/Col:</strong> ' + e.lineno + ':' + e.colno + '<br/>' +
+                         '<strong>Stack:</strong> ' + (e.error ? e.error.stack : 'N/A');
+      document.documentElement.appendChild(errBox);
+    });
+  </script>
+  
+  <!-- Premium Custom Viewfinder SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23080f13'/%3E%3Crect x='12' y='12' width='76' height='76' rx='12' fill='none' stroke='%23ffba20' stroke-width='4' stroke-dasharray='10 6'/%3E%3Ctext x='50%25' y='63%25' font-size='38' font-family='monospace' font-weight='bold' fill='%23ffdca1' text-anchor='middle'%3EMH%3C/text%3E%3C/svg%3E"/>
+  
+  <!-- Open Graph / Link Preview / Social Metadata (Professional Previews) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Mehdi Hassan // Android & AI Engineer"/>
+  <meta property="og:description" content="Cinematic dark-noir developer portfolio. Crafting high-performance native Android, AI agents, and secure system architectures from Kochi to London."/>
+  <meta property="og:image" content="https://mehdihassan.github.io/og-preview.png"/>
+  <meta property="og:url" content="https://mehdihassan.github.io"/>
+  
+  <!-- Twitter Card Previews -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Mehdi Hassan // Android & AI Engineer"/>
+  <meta name="twitter:description" content="Cinematic dark-noir developer portfolio from Kochi to London. Core Compose, Flutter, & Agentic engineering."/>
+  <meta name="twitter:image" content="https://mehdihassan.github.io/og-preview.png"/>
+  
+  <!-- Tailwind CSS & plugins -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Premium Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet"/>
+  
+  <!-- Material Symbols Outlined Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  
+  <!-- Custom Cinematic Noir Stylesheet -->
+  <link href="style.css" rel="stylesheet"/>
+  
+  <!-- Structured Person / Developer SEO Schema.org Metadata -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mehdi Hassan",
+    "jobTitle": "Android & AI Engineer",
+    "url": "https://mehdihassan.github.io",
+    "sameAs": [
+      "https://www.linkedin.com/in/mehdihassan93/",
+      "https://github.com/mehdihassan93/"
+    ],
+    "description": "Android & AI Engineer crafting high-performance, intelligent digital architectures from Kochi to London.",
+    "knowsAbout": ["Android Development", "AI Engineering", "Mobile Architecture", "Kotlin", "Web Design", "Software Engineering"],
+    "homeLocation": {
+      "@type": "Place",
+      "name": "London, UK"
+    }
+  }
+  </script>
+  
+  <!-- EmailJS Browser SDK for direct secure email transmission -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  
+  <!-- Tailwind Theme Customization -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            background: "#0d1418",
+            surface: "#0d1418",
+            "surface-dim": "#0d1418",
+            "surface-bright": "#333a3f",
+            "surface-container-lowest": "#080f13",
+            "surface-container-low": "#151d21",
+            "surface-container": "#192125",
+            "surface-container-high": "#242b2f",
+            "surface-container-highest": "#2f363a",
+            "on-surface": "#dce3e9",
+            "on-surface-variant": "#d5c4ab",
+            "outline": "#9e8f78",
+            "outline-variant": "#514532",
+            primary: "#ffdca1",
+            "primary-fixed": "#ffdea8",
+            "primary-fixed-dim": "#ffba20",
+            secondary: "#c6c6cc",
+            tertiary: "#dde1eb",
+            "on-tertiary-container": "#4d525a"
+          },
+          fontFamily: {
+            display: ["Playfair Display", "Georgia", "serif"],
+            body: ["Hanken Grotesk", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-background text-on-surface select-none">
+  
+  <!-- Cinematic Overlays -->
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+  <div class="scanlines-overlay"></div>
+  
+  <!-- 20s Idle CRT TV Static Hiss Overlay -->
+  <div class="tv-static" id="static-screen">
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-50 px-4">
+      <div class="p-8 glass-panel border border-outline-variant/30 text-center max-w-md">
+        <h2 class="font-mono text-primary text-xl uppercase tracking-widest mb-4">FEED DISCONNECTED</h2>
+        <div class="w-16 h-[2px] bg-primary mx-auto mb-6"></div>
+        <p class="font-mono text-xs text-on-surface-variant leading-relaxed mb-6 uppercase tracking-wider">
+          SIGNAL LOST... NO INPUT DETECTED.<br/>
+          TOUCH SCREEN OR MOVE CURSOR TO HEAL TRANSMISSION.
+        </p>
+        <span class="font-mono text-[10px] text-primary/40 animate-pulse uppercase">REC CONTINUOUS // SCANNING SYSTEM</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kochi -> London Keyboard Egg Sunset Cross-Dissolve Overlay -->
+  <div class="fixed inset-0 z-[9990] hidden bg-[#0d1418]" id="transit-overlay">
+    <!-- Kochi Dusk Panel -->
+    <div class="absolute inset-0 flex flex-col justify-between p-12 transition-opacity duration-[1500ms] opacity-0 z-10" id="transit-kochi" style="background: linear-gradient(to top, #1c0803 0%, #3e1208 40%, #852a12 75%, #ffb443 100%);">
+      <div class="flex justify-between font-mono text-xs text-primary/70 uppercase">
+        <span>01 // DEPARTURE SITE</span>
+        <span>KOCHI, INDIA // DUSK</span>
+      </div>
+      <div class="max-w-xl">
+        <h2 class="font-display text-4xl md:text-6xl text-primary font-bold uppercase mb-4">THE ORIGIN</h2>
+        <p class="font-mono text-sm text-[#ffdca1]/80 leading-relaxed uppercase">
+          HUMID OCEAN AIR, FAINT COCONUT SHADOWS, A FOUNDATIONAL GRID EXPOSED BENEATH THE HEAT. THE FIRST ACT COMMENCES IN KERALA.
+        </p>
+      </div>
+      <div class="font-mono text-[10px] text-primary/40 uppercase">UTC +5:30 // TRANSIT TRANSITION PROTOCOL ACTIVE</div>
+    </div>
+    
+    <!-- London Night Panel -->
+    <div class="absolute inset-0 flex flex-col justify-between p-12 transition-opacity duration-[1500ms] opacity-0 z-20" id="transit-london" style="background: linear-gradient(to top, #06090a 0%, #0d161a 50%, #152229 100%);">
+      <div class="flex justify-between font-mono text-xs text-primary/70 uppercase">
+        <span>02 // DESTINATION LINK</span>
+        <span>LONDON, UK // MIDNIGHT</span>
+      </div>
+      <div class="max-w-xl">
+        <h2 class="font-display text-4xl md:text-6xl text-primary font-bold uppercase mb-4">THE METROPOLIS</h2>
+        <p class="font-mono text-sm text-on-surface-variant leading-relaxed uppercase">
+          RAIN-SLICK SLATE, SHARP HIGH-RISE GLOWS, THE CHILL OF SYSTEM CORE. ARCHITECTING MOBILE ECOSYSTEMS WITHIN THE UK HEARTLAND.
+        </p>
+      </div>
+      <div class="font-mono text-[10px] text-primary/40 uppercase">UTC +0:00 // ARRIVAL VERIFIED</div>
+    </div>
+  </div>
+
+  <!-- Interactive Terminal Specs Simulator (404 Viewport Core) -->
+  <div class="fixed inset-0 z-[9980] hidden flex items-center justify-center p-6 bg-background/95 backdrop-blur-md" id="terminal-viewport">
+    <div class="w-full max-w-2xl terminal-screen text-xs border border-outline-variant/30 flex flex-col gap-6">
+      <div class="flex justify-between items-center border-b border-outline-variant/20 pb-4 font-mono">
+        <span class="text-primary uppercase font-bold">TERMINAL // SYSTEM_SPECS_LOG</span>
+        <button class="text-on-surface-variant hover:text-primary hover:scale-110 font-bold transition-all text-sm" id="terminal-close">[X] CLOSE FEED</button>
+      </div>
+      <div class="flex-1 min-h-[250px] flex flex-col gap-2 font-mono leading-relaxed" id="terminal-lines">
+        <!-- Lines dynamically injected by app.js -->
+      </div>
+      <div class="border-t border-outline-variant/20 pt-4 flex justify-between items-center font-mono">
+        <span class="text-[10px] text-primary/40">CORE SPECS: MSCHI V5.02 // KCH-LDN</span>
+        <button class="lever-btn px-4 py-2 border border-primary/20 text-primary hover:border-primary" id="terminal-reboot">RE-BOOT SPEC</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cold Open Loading Overlay -->
+  <div class="fixed inset-0 bg-[#080f13] z-[9999] flex flex-col justify-between p-12" id="cold-open-loader">
+    <div class="flex justify-between font-mono text-[10px] text-primary/40 uppercase tracking-[0.25em]">
+      <span>PRODUCER: MEHDI HASSAN</span>
+      <span>SECURE PORTFOLIO SHELL // MMXXVI</span>
+    </div>
+    
+    <!-- Central Decryptor -->
+    <div class="max-w-xl mx-auto text-center flex flex-col items-center gap-12">
+      <!-- monospaced blink connection log -->
+      <div class="text-left w-full border border-outline-variant/20 bg-background/50 p-6 font-mono text-xs rounded mb-6 min-h-[140px] max-w-md mx-auto leading-relaxed" id="loader-terminal">
+        <!-- Text injected by app.js -->
+      </div>
+      
+      <!-- Big cinematic Enter button -->
+      <button class="px-8 py-5 border-2 border-primary text-primary font-mono text-xs uppercase tracking-[0.3em] font-bold relative overflow-hidden group opacity-0 pointer-events-none transition-all duration-700 ease-out hovered-scale scale-95 hover:tracking-[0.4em]" id="loader-enter-btn">
+        <span class="relative z-10">INITIALIZE TRANSMISSION</span>
+        <div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      </button>
+    </div>
+    
+    <div class="flex justify-between font-mono text-[9px] text-primary/30 uppercase">
+      <span>DEVICE METRICS: 60FPS SECURE</span>
+      <span>TOUCH TO START SOUNDSCAPE</span>
+    </div>
+  </div>
+
+  <!-- Custom Cursor Elements -->
+  <div class="custom-cursor hidden md:block" id="cursor"></div>
+  <div class="cursor-trail hidden md:block" id="cursor-trail"></div>
+
+  <!-- TOP APP BAR NAVIGATION -->
+  <header class="fixed top-0 left-0 w-full z-[100] flex justify-between items-center px-6 md:px-12 py-6 bg-transparent">
+    <!-- Title / Codename -->
+    <div class="flex flex-col">
+      <a href="#scene-hero" class="font-display text-lg md:text-xl font-bold tracking-tighter text-primary uppercase hover:tracking-wide transition-all duration-500">
+        MEHDI // KCH-LDN
+      </a>
+      <span class="font-mono text-[9px] text-primary/45 uppercase tracking-[0.2em] mt-0.5">Mobile & AI Engineer</span>
+    </div>
+    
+    <!-- Navigation Links -->
+    <nav class="hidden md:flex gap-8 items-center bg-surface-container-low/40 backdrop-blur-md px-6 py-3 border border-outline-variant/10 rounded-full glass-panel">
+      <a class="text-on-surface-variant font-mono text-[10px] uppercase tracking-widest hover:text-primary transition-all duration-300" href="#scene-about">01 // NOTE</a>
+      <a class="text-on-surface-variant font-mono text-[10px] uppercase tracking-widest hover:text-primary transition-all duration-300" href="#scene-work">02 // REELS</a>
+      <a class="text-on-surface-variant font-mono text-[10px] uppercase tracking-widest hover:text-primary transition-all duration-300" href="#scene-archive">03 // TIMELINE</a>
+      <a class="text-on-surface-variant font-mono text-[10px] uppercase tracking-widest hover:text-primary transition-all duration-300" href="#scene-contact">04 // SIGNAL</a>
+      <span class="w-[1px] h-3 bg-outline-variant/40"></span>
+      <!-- Transit Egg shortcut trigger -->
+      <a class="text-primary hover:text-primary-fixed-dim font-mono text-[10px] uppercase tracking-widest flex items-center gap-1 transition-all duration-300" id="transit-trigger" href="#">
+        KCH
+        <span class="material-symbols-outlined text-[12px] pt-0.5" style="font-variation-settings: 'wght' 600">east</span>
+        LDN
+      </a>
+    </nav>
+    
+    <!-- Diegetic sound toggle console button -->
+    <div class="flex items-center gap-4">
+      <button class="lever-btn px-4 py-2 flex items-center gap-3 border rounded-full font-mono text-[10px] glass-panel" id="sound-toggle" aria-label="Toggle atmospheric sound effects">
+        <div class="indicator-light"></div>
+        <span class="material-symbols-outlined text-[14px]">volume_off</span>
+        <span class="hidden md:inline font-mono tracking-widest">CONSOLE SOUND</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Climate Ambient Background Tint layers -->
+  <div class="climate-tint kochi" id="kochi-tint"></div>
+  <div class="climate-tint london" id="london-tint"></div>
+
+  <!-- MAIN SCROLLABLE WORLD -->
+  <main class="relative z-10" id="tracked-scenes">
+
+    <!-- ==========================================
+         SCENE I: THE COLD OPEN / INTRODUCTION
+         ========================================== -->
+    <section class="scene-container flex flex-col justify-center items-center px-6 md:px-24" id="scene-hero">
+      
+      <!-- Blurred Parallax Background Image -->
+      <div class="absolute inset-0 z-0 parallax-bg overflow-hidden opacity-30 brightness-50">
+        <img alt="Atmospheric London night horizon" class="w-full h-full object-cover scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHDMF-1mvpXHA2Eh2DrtAFy48eINK-c8CrbvwfLPX9Rh48Ik6F8Shdry_GvjZtHFdQg28WUQgycXLG74QxaOfQGFUAXuOLSrbSEj1-nuh5AucGkTQFf6-dfczlFmAOWFaDDq3FcjP5wyjsOGsBVObPCHb8ZT3samAO5-SaaZmwwxGcw9o6ZDF5gLFy3gfm9FbUrhijWbFPzqBmrI8wJNtOj3Pvx0IQzm0Kk5aU9-1qdDExR3lSSWkajXe15e71oBDNLPkaEfYqZ8U"/>
+      </div>
+      
+      <!-- Static Viewfinder viewport Frame overlay -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[82vh] pointer-events-none z-10 border border-outline-variant/10">
+        <div class="viewfinder-corner top-0 left-0 border-t-2 border-l-2"></div>
+        <div class="viewfinder-corner top-0 right-0 border-t-2 border-r-2"></div>
+        <div class="viewfinder-corner bottom-0 left-0 border-b-2 border-l-2"></div>
+        <div class="viewfinder-corner bottom-0 right-0 border-b-2 border-r-2"></div>
+        
+        <!-- Monospaced camera recording tags -->
+        <div class="absolute top-4 left-6 font-mono text-[9px] text-primary/45 uppercase tracking-[0.25em]">
+          REC ● [AUTO] // 24FPS
+        </div>
+        <div class="absolute bottom-4 right-6 font-mono text-[9px] text-primary/45 uppercase tracking-[0.25em]">
+          ISO 800 // APERTURE F/1.8 // KCH-LDN
+        </div>
+      </div>
+
+      <!-- Core Hero Content -->
+      <div class="relative z-20 text-center max-w-4xl lens-focused-panel">
+        <div class="inline-flex items-center gap-3 mb-6 bg-surface-container-low/50 border border-outline-variant/20 px-4 py-1.5 rounded">
+          <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim animate-pulse"></span>
+          <span class="font-mono text-[10px] tracking-[0.2em] text-primary uppercase">PRODUCTION ACT: MOBILE CORE</span>
+        </div>
+        
+        <h1 class="font-display text-4xl md:text-7xl font-bold text-on-surface mb-10 tracking-tighter leading-[1.05]">
+          Building bridges <br class="hidden md:block"/>
+          between worlds, <br class="hidden md:block"/>
+          <span class="text-primary">one frame</span> at a time.
+        </h1>
+        
+        <div class="flex flex-col md:flex-row gap-6 justify-center items-center mt-12">
+          <a href="#scene-about" class="lever-btn px-8 py-4 border font-bold flicker-hover flex items-center gap-2">
+            <span>ENTER PORTFOLIO NOTE</span>
+            <span class="material-symbols-outlined text-sm">arrow_downward</span>
+          </a>
+          
+          <div class="hidden md:block h-[1px] w-12 bg-outline-variant/40"></div>
+          
+          <!-- Transit quick indicators -->
+          <div class="flex items-center gap-4 text-on-surface-variant font-mono text-xs uppercase tracking-widest">
+            <span class="city-kochi cursor-pointer hover:text-primary transition-colors underline decoration-dotted">Kochi</span>
+            <span class="material-symbols-outlined text-primary scale-75 pt-0.5">transit_enterexit</span>
+            <span class="city-london cursor-pointer hover:text-primary transition-colors underline decoration-dotted">London</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Scenic Scroll down Panning prompt -->
+      <div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 opacity-25 flex flex-col items-center gap-3">
+        <div class="w-[1px] h-16 bg-gradient-to-t from-primary to-transparent"></div>
+        <span class="font-mono text-[9px] tracking-[0.4em] uppercase text-on-surface-variant">SCROLL TO PAN SCENE</span>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SCENE II: THE NARRATIVE / DIRECTOR'S NOTE
+         ========================================== -->
+    <section class="scene-container py-32 px-6 md:px-12 flex items-center" id="scene-about">
+      <div class="max-w-4xl mx-auto lens-focused-panel">
+        
+        <div class="flex items-center gap-4 mb-8">
+          <span class="w-8 h-[1px] bg-primary"></span>
+          <span class="font-mono text-[10px] text-primary uppercase tracking-[0.25em]">EXT. STUDIO DECK - CONTINUOUS</span>
+        </div>
+        
+        <h2 class="font-display text-4xl md:text-6xl text-primary font-bold uppercase mb-16 leading-none tracking-tight">The Director's Note</h2>
+        
+        <div class="space-y-10 font-display text-xl md:text-3xl text-[#b7b8be] italic leading-relaxed md:leading-snug">
+          <p>
+            It began in the humid, salt-aired streets of <span class="city-kochi not-italic font-bold text-on-surface underline decoration-solid hover:text-primary transition-all cursor-pointer">Kochi</span>. The journey was never about a destination, but a sequence of frames carefully exposed. At <span class="text-primary not-italic font-semibold">APJ Abdul Kalam Technological University</span>, the technical blueprint was drafted—a foundational study of computer logic that would eventually power the mobile systems I sought to build.
+          </p>
+          <p>
+            The first act unfolded at <span class="text-on-surface not-italic font-semibold">EGuidanceLabs</span> in Kerala, where the raw energy of design met the precision of mobile technology. It was here I refined my Flutter craft, establishing scalable foundations that powered regional platforms and modular UI systems.
+          </p>
+          <p>
+            Moving into senior realms took me to <span class="text-on-surface not-italic font-semibold">Aideon Limited</span> in London. The focus tightened, shifting from local grids to cross-platform mobile architectures that prioritized performance, accessibility, and pixel-accurate interface design in complex product ecosystems.
+          </p>
+          <p>
+            Eventually, the horizon shifted fully to <span class="city-london not-italic font-bold text-on-surface underline decoration-solid hover:text-primary transition-all cursor-pointer">London</span>. Refined by an MSc in Web Development at the <span class="text-primary not-italic font-semibold">University of Roehampton</span>, I currently engineer native Android apps at <span class="text-on-surface not-italic font-semibold font-bold">Flyinbird</span>, shipping core customer-facing features in Kotlin and Jetpack Compose.
+          </p>
+          <p>
+            Standing between two worlds—India and the UK, native Android and Flutter—my work exists in the tension between engineering complexity and artistic atmosphere. This is not just a career; it is a long-form production, and we are only in the second act.
+          </p>
+        </div>
+
+        <!-- Technical Tags / metadata -->
+        <div class="mt-20 flex flex-wrap gap-4">
+          <div class="tech-tag primary">Android Engineer</div>
+          <div class="tech-tag primary">Flutter Creator</div>
+          <div class="tech-tag">Kochi Origin</div>
+          <div class="tech-tag">London Resident</div>
+          <div class="tech-tag">AI Integrations</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SCENE III: SELECTED WORK / THE SCREENING
+         ========================================== -->
+    <section class="scene-container py-24 px-6 md:px-12 flex flex-col justify-center" id="scene-work">
+      <div class="max-w-7xl mx-auto w-full flex flex-col gap-12 lens-focused-panel">
+        
+        <!-- Header -->
+        <div class="flex justify-between items-end border-b border-outline-variant/10 pb-6">
+          <div>
+            <span class="font-mono text-[10px] text-primary uppercase tracking-[0.25em] block mb-2">SCENE III // SCREENING ROOM</span>
+            <h2 class="font-display text-3xl md:text-5xl font-bold uppercase tracking-tight">Selected Productions</h2>
+          </div>
+          
+          <!-- Direction levers for navigation -->
+          <div class="flex items-center gap-4">
+            <button class="lever-btn w-12 h-12 flex items-center justify-center rounded-full glass-panel" id="reel-prev">
+              <span class="material-symbols-outlined text-sm">west</span>
+            </button>
+            <button class="lever-btn w-12 h-12 flex items-center justify-center rounded-full glass-panel" id="reel-next">
+              <span class="material-symbols-outlined text-sm">east</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Horizontal Scroller Wrapper -->
+        <div class="reel-wrapper" id="works-scroller">
+          
+          <!-- Project 01: Flyinbird London -->
+          <div class="reel-panel flex flex-col md:flex-row gap-12 items-center p-4">
+            <div class="w-full md:w-3/5 aspect-video bg-surface-container-low border border-outline-variant/10 overflow-hidden relative group rounded-md">
+              <img alt="London high-rise skyscrapers" class="w-full h-full object-cover opacity-40 brightness-75 group-hover:scale-105 transition-transform duration-1000 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8lJ-zIUxfb55WBe-UIjirzg4FkNExUNjTcHO1ykKDK5lJ3udsLuaCbEXN_R-MCk8wQ7uYqc9dnl4U3JJaK8L0lDI_k6QMqj6Q8_YWWl3GQUnzKDtg1JG4e48svwnumiNS9v0tTcrKSvfjiTQa_LS7yDfcfKgcqmNAfZ5y2Hp1hiPLES7E8Y5MCka6Kx59mu-Sc_zarUhmALzX6rLN2l2Wta3BPT8TR-IbnrqCR5YTxhaHN_MGFkfBrFO_TxwXzC3aYJHUsgnx-7Q"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+              
+              <!-- Technical crosshair corners -->
+              <div class="absolute inset-6 pointer-events-none opacity-30">
+                <div class="viewfinder-corner top-0 left-0 border-t border-l"></div>
+                <div class="viewfinder-corner top-0 right-0 border-t border-r"></div>
+                <div class="viewfinder-corner bottom-0 left-0 border-b border-l"></div>
+                <div class="viewfinder-corner bottom-0 right-0 border-b border-r"></div>
+              </div>
+            </div>
+            
+            <div class="w-full md:w-2/5 flex flex-col gap-6">
+              <div class="inline-flex items-center gap-2 text-primary font-mono text-[10px] uppercase tracking-widest">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim"></span>
+                <span>PRODUCTION UNIT 01 // LONDON, UK</span>
+              </div>
+              <h3 class="font-display text-3xl md:text-4xl font-bold uppercase text-on-surface">Flyinbird Android</h3>
+              <p class="font-body text-on-surface-variant text-base leading-relaxed">
+                Currently engineering core customer-facing features for a high-growth UK financial mobile application using native Android (Kotlin, Jetpack Compose). Led major UX/UI overhauls, integrated Crashlytics feedback loops to optimize system stability, and modularized codebases to streamline developer pipelines.
+              </p>
+              
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="tech-tag primary">Kotlin</span>
+                <span class="tech-tag primary">Jetpack Compose</span>
+                <span class="tech-tag">Clean Architecture</span>
+                <span class="tech-tag">MVVM</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 02: Aideon London -->
+          <div class="reel-panel flex flex-col md:flex-row gap-12 items-center p-4">
+            <div class="w-full md:w-3/5 aspect-video bg-surface-container-low border border-outline-variant/10 overflow-hidden relative group rounded-md">
+              <img alt="High-tech interface data visualizer" class="w-full h-full object-cover opacity-35 brightness-75 group-hover:scale-105 transition-transform duration-1000 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRWfrPh1RDUKSRqsmEmmQEzFb0PgyloMQMCbY1dbJsv2ZImyaBKAhuVWaKL093Il_sGUN5mKuyIGS6jd6GrUfvl7IO_N3vpxHkKFxfK7nE7zwX3C-_rOVCe0_YCc4jX_aP8z1-0ZqpbklT9D82CxKD8uUKXy5cOu0fY1Qrfh39bPT5Ipfg1hp04Cen4-bPI-LzGMM9dc5ZqbqSbHr-i6T9S6p4ywkwqFb7fvWnZN806CQwGmTBhATtXr4mh_RHMVW7zcJy-XS5UVo"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+              
+              <div class="absolute inset-6 pointer-events-none opacity-30">
+                <div class="viewfinder-corner top-0 left-0 border-t border-l"></div>
+                <div class="viewfinder-corner top-0 right-0 border-t border-r"></div>
+                <div class="viewfinder-corner bottom-0 left-0 border-b border-l"></div>
+                <div class="viewfinder-corner bottom-0 right-0 border-b border-r"></div>
+              </div>
+            </div>
+            
+            <div class="w-full md:w-2/5 flex flex-col gap-6">
+              <div class="inline-flex items-center gap-2 text-primary font-mono text-[10px] uppercase tracking-widest">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim"></span>
+                <span>PRODUCTION UNIT 02 // LONDON, UK</span>
+              </div>
+              <h3 class="font-display text-3xl md:text-4xl font-bold uppercase text-on-surface">Aideon Limited</h3>
+              <p class="font-body text-on-surface-variant text-base leading-relaxed">
+                Spearheaded cross-platform mobile architecture (Flutter/Dart) to build AI-driven data visualization applications. Focused tightly on Android GPU thread performance, pixel-accurate visual layouts in synergy with UI design, and secure cloud sync integrations via Firebase.
+              </p>
+              
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="tech-tag primary">Flutter</span>
+                <span class="tech-tag primary">Dart</span>
+                <span class="tech-tag">Firebase</span>
+                <span class="tech-tag">State Management</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 03: EGuidanceLabs & network_kit -->
+          <div class="reel-panel flex flex-col md:flex-row gap-12 items-center p-4">
+            <div class="w-full md:w-3/5 aspect-video bg-surface-container-low border border-outline-variant/10 overflow-hidden relative group rounded-md">
+              <img alt="Kochi software studio" class="w-full h-full object-cover opacity-35 brightness-75 group-hover:scale-105 transition-transform duration-1000 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWug_4tlS1jLW1k-DrrgcaLcZeidBkkWMkwfI3i708oLipKUK71U_3FFzpEX-0baDMhdt30Gkj6GrZln5SAuzquObn9lfx7PoqwpcdGZg8t5U9K0jdoBVfJImDUlQ9Q9MwrhIiziTLQIxGgyMFsD-oET3KTDJ8i5Br6xcgZyd8DLltZucBg3OrkaOOplkX_p9PEIUrHuaTiLde_N_njUTsKikoqwM77uQptSiHy23oxRxC7c4uGFoYSOT7X4RwPUohfzZxXPsoZrk"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+              
+              <!-- Console Dashboard Card Visual Overlay -->
+              <div class="absolute inset-0 flex items-center justify-center p-6">
+                <div class="glass-panel p-6 border border-primary/20 max-w-sm rounded w-full font-mono text-[10px] leading-relaxed">
+                  <span class="text-primary block mb-2 font-bold">// network_kit // VER 1.2.0</span>
+                  <div class="w-full h-[1px] bg-primary/20 mb-3"></div>
+                  <p class="text-on-surface-variant mb-1">> Initializing REST client...</p>
+                  <p class="text-on-surface-variant mb-1">> Intercepting request header...</p>
+                  <p class="text-primary-fixed-dim">> Response: 200 OK [124ms]</p>
+                  <div class="w-full h-[1px] bg-primary/20 mt-3 mb-2"></div>
+                  <span class="text-[9px] text-primary/45 uppercase block">PUB.DEV PACKAGE COMPACT</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="w-full md:w-2/5 flex flex-col gap-6">
+              <div class="inline-flex items-center gap-2 text-primary font-mono text-[10px] uppercase tracking-widest">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim"></span>
+                <span>PRODUCTION UNIT 03 // KOCHI, INDIA</span>
+              </div>
+              <h3 class="font-display text-3xl md:text-4xl font-bold uppercase text-on-surface">EGuidanceLabs & network_kit</h3>
+              <p class="font-body text-on-surface-variant text-base leading-relaxed">
+                As Associate Flutter Developer in India, engineered client products across SaaS and ed-tech sectors. Authored and published <a href="https://pub.dev" target="_blank" class="text-primary hover:underline">network_kit</a>, a lightweight open-source Dart package designed to modularize, intercept, and streamline mobile HTTP network layer requests.
+              </p>
+              
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="tech-tag primary">Flutter/Dart</span>
+                <span class="tech-tag primary">pub.dev Package</span>
+                <span class="tech-tag">REST API</span>
+                <span class="tech-tag">SaaS Core</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 04: On-Device AI/ML Glitch Easter Egg Card -->
+          <div class="reel-panel flex flex-col md:flex-row gap-12 items-center p-4">
+            <div class="w-full md:w-3/5 aspect-video bg-surface-container-low border border-outline-variant/10 overflow-hidden relative group rounded-md" id="glitch-card">
+              <img alt="Neural network circuit glow" class="w-full h-full object-cover opacity-25 brightness-50 group-hover:opacity-40 transition-opacity duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFkilpLJcSdSoFZgmbiwFqZr6uPJngcW5KqudCeG2JIo20z2hhNK2BAgoHHaGUmYcdJlcQ65kaO3FLUYsZPBItks-j72HWnnw2aSkQD82GMOktLcUzgwod18gCTgFpm4La222BgpSGncw25KapGQmVMWgX5tMwjUrTUjmxWB8dc9g3V2I7xHv5gGltfAMCP79iAB9P8KfZ5pubNE-uEjhED8FYeDC8B_avZlmJZC1SJdspM3rqCo1qjivYxDLgaToZQ006L279NvI"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+              
+              <!-- Glitching Viewfinder corners -->
+              <div class="absolute inset-6 pointer-events-none opacity-40">
+                <div class="viewfinder-corner top-0 left-0 border-t border-l"></div>
+                <div class="viewfinder-corner top-0 right-0 border-t border-r"></div>
+                <div class="viewfinder-corner bottom-0 left-0 border-b border-l"></div>
+                <div class="viewfinder-corner bottom-0 right-0 border-b border-r"></div>
+              </div>
+              
+              <!-- Decrypter Display Center -->
+              <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+                <span class="font-mono text-[9px] text-primary/45 uppercase tracking-[0.3em] mb-2">SIGNAL DECODER UNIT</span>
+                <div class="font-mono text-lg text-primary uppercase font-bold tracking-widest border border-primary/20 bg-background/80 px-6 py-3 rounded" id="glitch-title" data-text="AI CORE DECRYPTOR">AI CORE DECRYPTOR</div>
+                <span class="font-mono text-[8px] text-on-surface-variant/40 uppercase mt-4">SHAKE MOUSE VIGOROUSLY ON SCREEN TO DECODE FEED</span>
+              </div>
+            </div>
+            
+            <div class="w-full md:w-2/5 flex flex-col gap-6">
+              <div class="inline-flex items-center gap-2 text-primary font-mono text-[10px] uppercase tracking-widest">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim"></span>
+                <span>PRODUCTION UNIT 04 // EXPERIMENTAL LAB</span>
+              </div>
+              <h3 class="font-display text-3xl md:text-4xl font-bold uppercase text-on-surface">On-Device AI/ML Core</h3>
+              <p class="font-body text-on-surface-variant text-base leading-relaxed">
+                Active researcher integrating on-device machine learning architectures into mobile frames. Engineered responsive object detectors and facial mesh trackers using TensorFlow Lite, MediaPipe, and Google ML Kit running efficiently within handheld device loops.
+              </p>
+              
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="tech-tag primary">TensorFlow Lite</span>
+                <span class="tech-tag primary">MediaPipe</span>
+                <span class="tech-tag">ML Kit</span>
+                <span class="tech-tag">On-Device Inference</span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SCENE III.V: THE PLAYGROUND / B-ROLL
+         ========================================== -->
+    <section class="scene-container py-32 px-6 md:px-12 flex items-center" id="scene-playground">
+      <div class="max-w-5xl mx-auto w-full lens-focused-panel">
+        
+        <div class="flex items-center gap-4 mb-8">
+          <span class="w-8 h-[1px] bg-primary"></span>
+          <span class="font-mono text-[10px] text-primary uppercase tracking-[0.25em]">SCENE III.V // THE CUTTING ROOM FLOOR</span>
+        </div>
+        
+        <h2 class="font-display text-4xl md:text-6xl text-primary font-bold uppercase mb-8">Behind The Scenes</h2>
+        <p class="font-body text-on-surface-variant max-w-2xl mb-16 leading-relaxed">
+          Experimental snippets, security playbooks, and micro-animations that leak out of the main timeline. This is where system logic is bent, and the playground begins.
+        </p>
+
+        <!-- Dynamic Grid of Experiments -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+          
+          <!-- Experiment 1: Hacking sandbox -->
+          <div class="glass-panel p-8 border border-outline-variant/10 rounded flex flex-col justify-between min-h-[280px] hover:border-primary/40 transition-colors duration-500 group cursor-pointer">
+            <div>
+              <span class="font-mono text-[9px] text-primary tracking-widest block mb-4">LOG 01 // SECURITY PENTEST</span>
+              <h4 class="font-display text-xl text-on-surface font-semibold uppercase mb-4 group-hover:text-primary transition-colors">Ethical Hacking Sandbox</h4>
+              <p class="font-body text-xs text-on-surface-variant leading-relaxed">
+                Penetration testing suites, security scanners, and network decoders. Explored memory sanitizers, sandboxed scripting environments, and cross-site scripting defenses.
+              </p>
+            </div>
+            <div class="flex justify-between items-center mt-8 pt-4 border-t border-outline-variant/5">
+              <span class="font-mono text-[9px] text-primary/45">VERIFIED ACTIVE FEED</span>
+              <span class="material-symbols-outlined text-[16px] text-primary opacity-0 group-hover:opacity-100 transition-opacity">terminal</span>
+            </div>
+          </div>
+          
+          <!-- Experiment 2: Compose Physics -->
+          <div class="glass-panel p-8 border border-outline-variant/10 rounded flex flex-col justify-between min-h-[280px] hover:border-primary/40 transition-colors duration-500 group cursor-pointer">
+            <div>
+              <span class="font-mono text-[9px] text-primary tracking-widest block mb-4">LOG 02 // COMPOSE CANVAS</span>
+              <h4 class="font-display text-xl text-on-surface font-semibold uppercase mb-4 group-hover:text-primary transition-colors">Micro-Physics Canvas</h4>
+              <p class="font-body text-xs text-on-surface-variant leading-relaxed">
+                A custom Jetpack Compose experimental sandbox featuring gravity vectors, particle collision systems, and real-time gyroscope/accelerometer physics integrations in mobile layouts.
+              </p>
+            </div>
+            <div class="flex justify-between items-center mt-8 pt-4 border-t border-outline-variant/5">
+              <span class="font-mono text-[9px] text-primary/45">60FPS LOCKED</span>
+              <span class="material-symbols-outlined text-[16px] text-primary opacity-0 group-hover:opacity-100 transition-opacity">gyroscope</span>
+            </div>
+          </div>
+
+          <!-- Experiment 3: Llama LLM chat -->
+          <div class="glass-panel p-8 border border-outline-variant/10 rounded flex flex-col justify-between min-h-[280px] hover:border-primary/40 transition-colors duration-500 group cursor-pointer">
+            <div>
+              <span class="font-mono text-[9px] text-primary tracking-widest block mb-4">LOG 03 // ON-DEVICE AI</span>
+              <h4 class="font-display text-xl text-on-surface font-semibold uppercase mb-4 group-hover:text-primary transition-colors">On-Device LLM Node</h4>
+              <p class="font-body text-xs text-on-surface-variant leading-relaxed">
+                Integrating local, quantized lightweight Large Language Models (like Llama 3 2B / Gemma 2B) directly within Flutter and Android applications using native C++ wrappers.
+              </p>
+            </div>
+            <div class="flex justify-between items-center mt-8 pt-4 border-t border-outline-variant/5">
+              <span class="font-mono text-[9px] text-primary/45">LOCAL INFERENCE [12T/S]</span>
+              <span class="material-symbols-outlined text-[16px] text-primary opacity-0 group-hover:opacity-100 transition-opacity">memory</span>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SCENE IV: TIMELINE / THE ARCHIVE CREDITS
+         ========================================== -->
+    <section class="scene-container py-32 px-6 md:px-12" id="scene-archive">
+      <div class="max-w-5xl mx-auto w-full lens-focused-panel">
+        
+        <!-- Header -->
+        <div class="flex items-center gap-4 mb-8">
+          <span class="w-8 h-[1px] bg-primary"></span>
+          <span class="font-mono text-[10px] text-primary uppercase tracking-[0.25em]">SCENE IV // THE TERMINAL INDEX</span>
+        </div>
+        
+        <h2 class="font-display text-4xl md:text-6xl text-primary-fixed font-bold uppercase mb-16">The Archive Credits</h2>
+        
+        <!-- Movie Credit Timeline Scroll Grid -->
+        <div class="credits-container flex flex-col gap-20">
+          
+          <!-- Experience credits -->
+          <div>
+            <div class="flex items-baseline gap-4 border-b border-outline-variant/15 pb-4 mb-10">
+              <h3 class="font-mono text-sm text-primary uppercase tracking-[0.2em]">DEPLOYS // PROFESSIONAL ROLES</h3>
+              <span class="w-[1px] h-3 bg-outline-variant/40"></span>
+              <span class="font-mono text-[10px] text-primary/45">SECTION_01</span>
+            </div>
+            
+            <div class="flex flex-col gap-6">
+              <!-- Flyinbird -->
+              <div class="credit-row">
+                <div class="font-mono text-xs text-primary/80 shrink-0 md:w-36">FEB 2024 — PRESENT</div>
+                <div class="flex-1 md:px-6">
+                  <h4 class="font-display text-lg text-on-surface font-semibold uppercase leading-tight hover:text-primary">Android Developer // Flyinbird</h4>
+                  <p class="font-body text-sm text-on-surface/90 mt-1 leading-relaxed max-w-xl">
+                    Shipping UK consumer features in Kotlin/Compose. Scaled database systems and telemetry logging pipelines via Crashlytics.
+                  </p>
+                </div>
+                <div class="font-mono text-[10px] text-primary/70 uppercase">London, UK</div>
+              </div>
+              
+              <!-- Aideon -->
+              <div class="credit-row">
+                <div class="font-mono text-xs text-primary/80 shrink-0 md:w-36">DEC 2022 — DEC 2023</div>
+                <div class="flex-1 md:px-6">
+                  <h4 class="font-display text-lg text-on-surface font-semibold uppercase leading-tight hover:text-primary">Flutter Android Developer // Aideon Limited</h4>
+                  <p class="font-body text-sm text-on-surface/90 mt-1 leading-relaxed max-w-xl">
+                    Maintained high-fidelity healthcare and visual data systems in Flutter. Optimized native threads and UI animations.
+                  </p>
+                </div>
+                <div class="font-mono text-[10px] text-primary/70 uppercase">London, UK</div>
+              </div>
+              
+              <!-- EGuidanceLabs -->
+              <div class="credit-row">
+                <div class="font-mono text-xs text-primary/80 shrink-0 md:w-36">JUN 2021 — JUL 2022</div>
+                <div class="flex-1 md:px-6">
+                  <h4 class="font-display text-lg text-on-surface font-semibold uppercase leading-tight hover:text-primary">Associate Flutter Developer // EGuidanceLabs</h4>
+                  <p class="font-body text-sm text-on-surface/90 mt-1 leading-relaxed max-w-xl">
+                    Engineered SaaS products, ed-tech clients, and managed mobile build releases to digital play stores.
+                  </p>
+                </div>
+                <div class="font-mono text-[10px] text-primary/70 uppercase">Kochi, India</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Academic foundation credits -->
+          <div>
+            <div class="flex items-baseline gap-4 border-b border-outline-variant/15 pb-4 mb-10">
+              <h3 class="font-mono text-sm text-primary uppercase tracking-[0.2em]">BLUEPRINTS // EDUCATION</h3>
+              <span class="w-[1px] h-3 bg-outline-variant/40"></span>
+              <span class="font-mono text-[10px] text-primary/45">SECTION_02</span>
+            </div>
+            
+            <div class="flex flex-col gap-6">
+              <!-- Roehampton -->
+              <div class="credit-row">
+                <div class="font-mono text-xs text-primary/80 shrink-0 md:w-36">SEP 2022 — OCT 2023</div>
+                <div class="flex-1 md:px-6">
+                  <h4 class="font-display text-lg text-on-surface font-semibold uppercase leading-tight hover:text-primary">University of Roehampton</h4>
+                  <p class="font-body text-sm text-on-surface/90 mt-1 leading-relaxed uppercase">
+                    MSc Web Development [Merit]
+                  </p>
+                </div>
+                <div class="font-mono text-[10px] text-primary/70 uppercase">London, UK</div>
+              </div>
+              
+              <!-- APJ Abdul Kalam -->
+              <div class="credit-row">
+                <div class="font-mono text-xs text-primary/80 shrink-0 md:w-36">2016 — 2020</div>
+                <div class="flex-1 md:px-6">
+                  <h4 class="font-display text-lg text-on-surface font-semibold uppercase leading-tight hover:text-primary">APJ Abdul Kalam Technological University</h4>
+                  <p class="font-body text-sm text-on-surface/90 mt-1 leading-relaxed uppercase">
+                    BTech Computer Science &amp; Engineering
+                  </p>
+                </div>
+                <div class="font-mono text-[10px] text-primary/70 uppercase">Kerala, India</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Credentials as quiet credits -->
+          <div>
+            <div class="flex items-baseline gap-4 border-b border-outline-variant/15 pb-4 mb-10">
+              <h3 class="font-mono text-sm text-primary uppercase tracking-[0.2em]">PROTOCOLS // CERTIFICATIONS</h3>
+              <span class="w-[1px] h-3 bg-outline-variant/40"></span>
+              <span class="font-mono text-[10px] text-primary/45">SECTION_03</span>
+            </div>
+            
+            <div class="flex flex-col border border-outline-variant/10 bg-surface-container-lowest/50 rounded">
+              <div class="flex justify-between items-center p-6 border-b border-outline-variant/10 hover:bg-primary/5 transition-colors">
+                <div class="flex items-center gap-4">
+                  <span class="material-symbols-outlined text-outline-variant">verified_user</span>
+                  <span class="font-mono text-xs text-on-surface uppercase font-bold tracking-wider">Certified Ethical Hacker (CEH) // SECURITY TESTING</span>
+                </div>
+                <span class="font-mono text-[9px] text-primary">VERIFIED</span>
+              </div>
+              
+              <div class="flex justify-between items-center p-6 border-b border-outline-variant/10 hover:bg-primary/5 transition-colors">
+                <div class="flex items-center gap-4">
+                  <span class="material-symbols-outlined text-outline-variant">flutter_dash</span>
+                  <span class="font-mono text-xs text-on-surface uppercase font-bold tracking-wider">Advanced Flutter Architecture // SYSTEMS DESIGN</span>
+                </div>
+                <span class="font-mono text-[9px] text-primary">VERIFIED</span>
+              </div>
+              
+              <div class="flex justify-between items-center p-6 hover:bg-primary/5 transition-colors">
+                <div class="flex items-center gap-4">
+                  <span class="material-symbols-outlined text-outline-variant">code</span>
+                  <span class="font-mono text-xs text-on-surface uppercase font-bold tracking-wider">Modern React &amp; Ethical Hacking // CLOUD STACKS</span>
+                </div>
+                <span class="font-mono text-[9px] text-primary">VERIFIED</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SCENE V: THE FINAL FRAME / CONTACT
+         ========================================== -->
+    <section class="scene-container py-32 px-6 md:px-12 flex flex-col justify-between" id="scene-contact">
+      
+      <!-- Scanline background element -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
+        <div class="w-full h-px bg-primary absolute top-1/4 animate-[scan_8s_linear_infinite]"></div>
+      </div>
+
+      <!-- Top aesthetic border tags -->
+      <div class="max-w-6xl mx-auto w-full flex justify-between items-center opacity-30 mt-6 hidden md:flex font-mono text-[9px] text-primary/75 tracking-[0.2em] uppercase">
+        <span>TRANSMISSION OVERWATCH ONGOING</span>
+        <span>REC SYSTEM STABLE</span>
+      </div>
+
+      <!-- Central Contact Module -->
+      <div class="max-w-6xl mx-auto w-full flex flex-col items-center gap-16 text-center justify-center my-auto lens-focused-panel">
+        
+        <div>
+          <span class="font-mono text-[10px] text-primary tracking-[0.3em] uppercase block mb-4">SCENE V // THE FINAL FRAME</span>
+          <h2 class="font-display text-4xl md:text-7xl font-bold text-primary-fixed uppercase tracking-tight leading-none mb-4">Establish Signal</h2>
+          <div class="w-16 h-[1.5px] bg-primary mx-auto mb-12"></div>
+        </div>
+
+        <!-- 2-Column Console Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full text-left items-start">
+          
+          <!-- Left Console: Secure Transmission Form & CV Download -->
+          <div class="flex flex-col gap-6 w-full items-center md:items-start">
+            <form class="glass-panel p-8 border border-outline-variant/20 rounded flex flex-col gap-6 w-full" id="transmission-form">
+              <span class="font-mono text-[9px] text-primary tracking-[0.2em] uppercase">// SECURE TRANSMISSION PANEL</span>
+              
+              <div class="flex flex-col gap-2 w-full">
+                <label class="font-mono text-[10px] text-primary/90 font-semibold uppercase tracking-wider">Sender Identity [Name]</label>
+                <input type="text" id="form-name" name="name" required class="bg-[#05080a] border border-outline/35 text-white font-mono text-xs p-3 rounded focus:outline-none focus:border-primary placeholder:text-on-surface-variant/40 transition-colors" placeholder="e.g. VISITOR_01"/>
+              </div>
+              
+              <div class="flex flex-col gap-2 w-full">
+                <label class="font-mono text-[10px] text-primary/90 font-semibold uppercase tracking-wider">Signal Channel [Email]</label>
+                <input type="email" id="form-email" name="email" required class="bg-[#05080a] border border-outline/35 text-white font-mono text-xs p-3 rounded focus:outline-none focus:border-primary placeholder:text-on-surface-variant/40 transition-colors" placeholder="e.g. channel@node.com"/>
+              </div>
+              
+              <div class="flex flex-col gap-2 w-full">
+                <label class="font-mono text-[10px] text-primary/90 font-semibold uppercase tracking-wider">Transmission Content [Message]</label>
+                <textarea id="form-message" name="message" required rows="3" class="bg-[#05080a] border border-outline/35 text-white font-mono text-xs p-3 rounded focus:outline-none focus:border-primary placeholder:text-on-surface-variant/40 transition-colors resize-none" placeholder="e.g. Establish connection request..."></textarea>
+              </div>
+              
+              <!-- GDPR Privacy & Consent Compliance Disclaimer -->
+              <p class="font-mono text-[8px] text-on-surface-variant/40 leading-relaxed uppercase tracking-wider">
+                * Consent overwatch: by transmitting this signal, you authorize the processing of your contact parameters (Name and Email) solely to reply to your transmission. No cookies, trackers, or marketing trackers are active.
+              </p>
+              
+              <div class="flex justify-between items-center mt-2 w-full">
+                <button type="submit" class="lever-btn px-6 py-3 border font-bold flex items-center gap-3">
+                  <div class="w-2 h-2 rounded-full bg-[#514532]" id="transmit-light"></div>
+                  <span>TRANSMIT SIGNAL</span>
+                </button>
+                <span class="font-mono text-[9px] text-primary/70 font-semibold uppercase" id="transmit-status">CONSOLE IDLE</span>
+              </div>
+            </form>
+
+            <!-- CV Download Button (Printable Resume Tab) -->
+            <a href="resume.html" target="_blank" class="lever-btn w-full p-5 border border-primary/20 hover:border-primary/50 rounded flex justify-between items-center transition-all duration-500 hover:bg-primary/5 group">
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary group-hover:animate-bounce">download</span>
+                <span class="font-mono text-xs uppercase tracking-widest text-on-surface">Acquire Blueprints [Print / Download CV]</span>
+              </div>
+              <span class="font-mono text-[9px] text-primary/60 uppercase">HTML PRINTABLE // PDF READY</span>
+            </a>
+          </div>
+
+          <!-- Right Console: World Clocks & Console Links -->
+          <div class="flex flex-col gap-6 w-full items-center md:items-start">
+            
+            <!-- Real-time World Clocks -->
+            <div class="flex flex-col md:flex-row gap-6 md:gap-12 p-6 glass-panel border border-outline-variant/20 rounded-md w-full justify-around">
+              <div class="text-center md:text-left">
+                <span class="font-mono text-[9px] text-on-surface-variant/50 uppercase tracking-[0.2em] block mb-1">Location: Kochi</span>
+                <div class="font-display text-3xl text-primary font-bold tracking-tighter" id="kochi-time">00:00:00</div>
+                <span class="font-mono text-[8px] text-primary/40 block mt-0.5">UTC +5:30 // INDIA</span>
+              </div>
+              
+              <div class="w-[1px] h-12 bg-outline-variant/20 hidden md:block self-center"></div>
+              
+              <div class="text-center md:text-left">
+                <span class="font-mono text-[9px] text-on-surface-variant/50 uppercase tracking-[0.2em] block mb-1">Location: London</span>
+                <div class="font-display text-3xl text-primary font-bold tracking-tighter" id="london-time">00:00:00</div>
+                <span class="font-mono text-[8px] text-primary/40 block mt-0.5">UTC +0:00 // UK</span>
+              </div>
+            </div>
+
+            <!-- Links -->
+            <div class="flex flex-col gap-4 w-full">
+              <a class="glass-panel p-4 border border-outline-variant/10 rounded hover:border-primary/40 flex justify-between items-center transition-all duration-500 hover:bg-primary/5 hover:px-6 font-mono text-xs uppercase text-on-surface-variant" href="mailto:mehdihassan22@gmail.com">
+                <span>01 // EMAIL DIRECT</span>
+                <span class="text-on-surface font-sans font-medium hover:text-primary transition-colors text-right select-all">mehdihassan22@gmail.com</span>
+              </a>
+              
+              <a class="glass-panel p-4 border border-outline-variant/10 rounded hover:border-primary/40 flex justify-between items-center transition-all duration-500 hover:bg-primary/5 hover:px-6 font-mono text-xs uppercase text-on-surface-variant" href="https://www.linkedin.com/in/mehdihassan93/" target="_blank">
+                <span>02 // LINKEDIN</span>
+                <span class="text-on-surface font-sans font-medium hover:text-primary transition-colors text-right">mehdihassan93</span>
+              </a>
+              
+              <a class="glass-panel p-4 border border-outline-variant/10 rounded hover:border-primary/40 flex justify-between items-center transition-all duration-500 hover:bg-primary/5 hover:px-6 font-mono text-xs uppercase text-on-surface-variant" href="https://github.com/mehdihassan93/" target="_blank">
+                <span>03 // GITHUB INDEX</span>
+                <span class="text-on-surface font-sans font-medium hover:text-primary transition-colors text-right">mehdihassan93</span>
+              </a>
+
+              <a class="glass-panel p-4 border border-outline-variant/10 rounded hover:border-primary/40 flex justify-between items-center transition-all duration-500 hover:bg-primary/5 hover:px-6 font-mono text-xs uppercase text-on-surface-variant" href="tel:+447436371606">
+                <span>04 // SIGNAL PHONE</span>
+                <span class="text-on-surface font-sans font-medium hover:text-primary transition-colors text-right select-all">+44 7436 371606</span>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="opacity-25 font-mono text-[9px] tracking-[0.25em] uppercase">
+          SYSTEM STATUS: TRANSMISSION COMPLETE // EOF // 0x5343454E4535
+        </div>
+      </div>
+
+      <!-- Footer specs dashboard links -->
+      <footer class="w-full py-10 px-6 md:px-12 flex flex-col md:flex-row gap-6 justify-between items-center border-t border-outline-variant/10 bg-surface-container-lowest/40 mt-16">
+        <div class="font-mono text-[10px] text-on-surface-variant/50 uppercase tracking-widest text-center md:text-left">
+          © MMXXVI MEHDI HASSAN. FROM KOCHI TO LONDON. ALL RIGHTS RESERVED.
+        </div>
+        
+        <div class="flex gap-8 font-mono text-[10px] uppercase text-on-tertiary-container items-center">
+          <a class="hover:text-primary transition-colors" href="#scene-about">Transit Log</a>
+          <a class="hover:text-primary transition-colors cursor-pointer" id="specs-trigger">Technical Specs</a>
+          <a class="hover:text-primary transition-colors" href="mailto:mehdihassan22@gmail.com">Signal</a>
+        </div>
+      </footer>
+    </section>
+
+  </main>
+
+  <!-- Mobile Bottom Snapped Navbar Menu -->
+  <nav class="fixed bottom-0 left-0 w-full z-[100] flex justify-around items-center px-4 pb-6 pt-3 md:hidden bg-surface-container-low/75 backdrop-blur-xl border-t border-outline-variant/25 rounded-t-2xl glass-panel">
+    <a class="flex flex-col items-center justify-center text-on-surface-variant/70 p-2 hover:text-primary transition-all duration-300" href="#scene-hero">
+      <span class="material-symbols-outlined text-[20px]">movie</span>
+      <span class="font-mono text-[8px] uppercase tracking-wider mt-1">Scene I</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant/70 p-2 hover:text-primary transition-all duration-300" href="#scene-about">
+      <span class="material-symbols-outlined text-[20px]">description</span>
+      <span class="font-mono text-[8px] uppercase tracking-wider mt-1">Note</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant/70 p-2 hover:text-primary transition-all duration-300" href="#scene-work">
+      <span class="material-symbols-outlined text-[20px]">theaters</span>
+      <span class="font-mono text-[8px] uppercase tracking-wider mt-1">Reels</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant/70 p-2 hover:text-primary transition-all duration-300" href="#scene-archive">
+      <span class="material-symbols-outlined text-[20px]">format_list_bulleted</span>
+      <span class="font-mono text-[8px] uppercase tracking-wider mt-1">Archive</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant/70 p-2 hover:text-primary transition-all duration-300" href="#scene-contact">
+      <span class="material-symbols-outlined text-[20px]">science</span>
+      <span class="font-mono text-[8px] uppercase tracking-wider mt-1">Signal</span>
+    </a>
+  </nav>
+
+  <!-- Core Javascript Logic -->
+  <script type="module" src="src/bootstrap.js"></script>
+</body>
+</html>
