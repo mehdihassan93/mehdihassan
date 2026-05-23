@@ -126,15 +126,13 @@ export function initScrollObserverFallback() {
       
       const ratio = entry.intersectionRatio;
       
-      // Calculate dynamic high-legibility lens parameters
-      const blurVal = Math.max(0, (1 - ratio) * 3);
-      const opacityVal = 0.35 + (ratio * 0.65);
-      const scaleVal = 0.96 + (ratio * 0.04);
-      const translateVal = (1 - ratio) * 25;
-      const brightnessVal = 0.65 + (ratio * 0.35);
+      // Calculate dynamic high-legibility lens parameters (no blur, floor 85% opacity)
+      const opacityVal = 0.85 + (ratio * 0.15);
+      const scaleVal = 0.98 + (ratio * 0.02);
+      const translateVal = (1 - ratio) * 12;
       
       // GPU Accelerated compositing
-      panel.style.filter = `blur(${blurVal}px) brightness(${brightnessVal})`;
+      panel.style.filter = 'none';
       panel.style.opacity = `${opacityVal}`;
       panel.style.transform = `scale(${scaleVal}) translate3d(0, ${translateVal}px, 0)`;
       panel.style.transition = 'filter 0.1s ease-out, transform 0.1s ease-out, opacity 0.1s ease-out';

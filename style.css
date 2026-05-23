@@ -11,8 +11,8 @@
   --color-surface-container: #192125;
   --color-surface-container-high: #242b2f;
   --color-surface-container-highest: #2f363a;
-  --color-on-surface: #dce3e9;
-  --color-on-surface-variant: #d5c4ab;
+  --color-on-surface: #f5f8fa; /* High-contrast crisp light-white gray */
+  --color-on-surface-variant: #f2e6d0; /* Premium, high-contrast warm cream-gold */
   --color-inverse-surface: #dce3e9;
   --color-inverse-on-surface: #2a3136;
   --color-outline: #9e8f78;
@@ -471,24 +471,24 @@ section.scene-container {
 
   @keyframes scene-lens-focus {
     entry 0% {
-      filter: blur(3px) brightness(0.7);
-      opacity: 0.35;
-      transform: scale(0.96) translateY(25px);
+      filter: none;
+      opacity: 0.85;
+      transform: scale(0.98) translateY(12px);
     }
     entry 100% {
-      filter: blur(0px) brightness(1);
+      filter: none;
       opacity: 1;
       transform: scale(1) translateY(0);
     }
     exit 0% {
-      filter: blur(0px) brightness(1);
+      filter: none;
       opacity: 1;
       transform: scale(1) translateY(0);
     }
     exit 100% {
-      filter: blur(3px) brightness(0.65);
-      opacity: 0.35;
-      transform: scale(0.97) translateY(-25px);
+      filter: none;
+      opacity: 0.85;
+      transform: scale(0.98) translateY(-12px);
     }
   }
   
