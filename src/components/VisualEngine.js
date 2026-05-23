@@ -27,6 +27,7 @@ export function initCustomCursor() {
   const cursor = getElement('#cursor');
   const cursorTrail = getElement('#cursor-trail');
   const parallaxBg = getElement('.parallax-bg');
+  const spotlight = getElement('#bg-spotlight');
   
   if (!cursor || !cursorTrail) return;
   
@@ -51,6 +52,12 @@ export function initCustomCursor() {
       const moveX = (cursorX - window.innerWidth / 2) / 75;
       const moveY = (cursorY - window.innerHeight / 2) / 75;
       parallaxBg.style.transform = `translate3d(${moveX}px, ${moveY}px, 0) scale(1.05)`;
+    }
+    
+    // Dynamic interactive background spotlight (GPU variables)
+    if (spotlight) {
+      spotlight.style.setProperty('--mouse-x', `${cursorX}px`);
+      spotlight.style.setProperty('--mouse-y', `${cursorY}px`);
     }
   });
   
