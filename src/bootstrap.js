@@ -4,8 +4,10 @@ import { initAudioEngine, toggleMasterSound } from './components/AudioEngine.js'
 import {
   initCustomCursor,
   initScrollObserverFallback,
+  decryptText,
   initTextDecrypter,
-  initWorksReel
+  initWorksReel,
+  initAudioSceneTracker
 } from './components/VisualEngine.js';
 import {
   startWorldClocks,
@@ -75,7 +77,16 @@ function setupColdOpen() {
     initIdleDetector();
     initKeyboardTransitEgg();
     initFormHandler();
+    initAudioSceneTracker();
     outputConsoleSignature();
+
+    // Trigger spectacular cinematic glitch decryption on main hero heading!
+    const heroTitle = getElement('#hero-title');
+    if (heroTitle) {
+      setTimeout(() => {
+        decryptText(heroTitle);
+      }, 600);
+    }
   });
 }
 

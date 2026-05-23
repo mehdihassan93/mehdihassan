@@ -369,6 +369,122 @@ function stopClimateAudio() {
   }
 }
 
+let telemetryInterval = null;
+
+// Rhythmic background satellite telemetry beeps for Scene IV (Playground)
+function startTelemetryBeeps() {
+  if (!audioCtx || !soundEnabled || telemetryInterval) return;
+  
+  function playTelemetryBeep() {
+    if (!audioCtx || !soundEnabled || audioCtx.state === 'suspended') return;
+    
+    const time = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    const filter = audioCtx.createBiquadFilter();
+    
+    osc.type = 'sine';
+    const freq = 1800 + Math.random() * 600;
+    osc.frequency.setValueAtTime(freq, time);
+    
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(freq, time);
+    filter.Q.setValueAtTime(12.0, time);
+    
+    gain.gain.setValueAtTime(0.0, time);
+    gain.gain.linearRampToValueAtTime(0.008, time + 0.012); // extremely soft aesthetic beep
+    gain.gain.exponentialRampToValueAtTime(0.0001, time + 0.12);
+    
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(masterGain);
+    
+    osc.start(time);
+    osc.stop(time + 0.15);
+    
+    osc.onended = () => {
+      osc.disconnect();
+      filter.disconnect();
+      gain.disconnect();
+    };
+  }
+  
+  telemetryInterval = setInterval(() => {
+    playTelemetryBeep();
+    if (Math.random() > 0.6) {
+      setTimeout(playTelemetryBeep, 160); // dynamic double beep cluster
+    }
+  }, 2200);
+}
+
+function stopTelemetryBeeps() {
+  if (telemetryInterval) {
+    clearInterval(telemetryInterval);
+    telemetryInterval = null;
+  }
+}
+
+// Procedural analog synth glitch power-up sweep for loader transition
+function playGlitchSweep() {
+  if (!audioCtx || !soundEnabled || audioCtx.state === 'suspended') return;
+  
+  const time = audioCtx.currentTime;
+  const osc1 = audioCtx.createOscillator();
+  const osc2 = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  const filter = audioCtx.createBiquadFilter();
+  
+  osc1.type = 'sawtooth';
+  osc1.frequency.setValueAtTime(60.0, time);
+  osc1.frequency.exponentialRampToValueAtTime(320.0, time + 0.65);
+  
+  osc2.type = 'triangle';
+  osc2.frequency.setValueAtTime(60.4, time);
+  osc2.frequency.exponentialRampToValueAtTime(180.0, time + 0.8);
+  
+  filter.type = 'lowpass';
+  filter.frequency.setValueAtTime(80, time);
+  filter.frequency.exponentialRampToValueAtTime(2500, time + 0.5);
+  filter.frequency.exponentialRampToValueAtTime(120, time + 0.8);
+  filter.Q.setValueAtTime(5.0, time);
+  
+  gain.gain.setValueAtTime(0.0, time);
+  gain.gain.linearRampToValueAtTime(0.2, time + 0.15);
+  gain.gain.linearRampToValueAtTime(0.1, time + 0.45);
+  gain.gain.exponentialRampToValueAtTime(0.0001, time + 0.85);
+  
+  // Fast frequency modulation (FM) for custom retro-computer chatter vibrato
+  const fm = audioCtx.createOscillator();
+  const fmGain = audioCtx.createGain();
+  fm.frequency.setValueAtTime(35, time); // 35Hz vibration
+  fmGain.gain.setValueAtTime(45, time);
+  
+  fm.connect(fmGain);
+  fmGain.connect(osc1.frequency);
+  
+  osc1.connect(filter);
+  osc2.connect(filter);
+  filter.connect(gain);
+  gain.connect(masterGain);
+  
+  osc1.start(time);
+  osc2.start(time);
+  fm.start(time);
+  
+  osc1.stop(time + 0.9);
+  osc2.stop(time + 0.9);
+  fm.stop(time + 0.9);
+  
+  osc1.onended = () => {
+    osc1.disconnect();
+    osc2.disconnect();
+    fm.disconnect();
+    fmGain.disconnect();
+    filter.disconnect();
+    gain.disconnect();
+  };
+}
+
 // Master Mute/Unmute Control
 export function toggleMasterSound(btn) {
   soundEnabled = !soundEnabled;
@@ -398,8 +514,69 @@ export function toggleMasterSound(btn) {
     }
     
     eventBus.emit('sound:state', { enabled: false });
+    
+    // Stop any active telemetry beeps when muted
+    stopTelemetryBeeps();
   }
   playClick();
+}
+
+// Smooth ambient synthesizer parameters morphing on scene scrolls
+function morphAmbientHum(sceneIndex) {
+  if (!audioCtx || !ambientHumNode || !soundEnabled) return;
+  
+  const { osc1, osc2, lowpass } = ambientHumNode;
+  const time = audioCtx.currentTime;
+  
+  // Immersive Spatialized Telemetry: only loop beeps on Scene IV (Playground)
+  if (sceneIndex === 3) {
+    startTelemetryBeeps();
+  } else {
+    stopTelemetryBeeps();
+  }
+  
+  try {
+    switch (sceneIndex) {
+      case 0: // Hero
+        osc1.frequency.exponentialRampToValueAtTime(55.0, time + 1.5);
+        osc2.frequency.exponentialRampToValueAtTime(55.4, time + 1.5);
+        lowpass.frequency.exponentialRampToValueAtTime(120, time + 1.5);
+        lowpass.Q.linearRampToValueAtTime(1.0, time + 1.5);
+        break;
+      case 1: // About (Kochi-London Narrative)
+        osc1.frequency.exponentialRampToValueAtTime(65.4, time + 1.5);
+        osc2.frequency.exponentialRampToValueAtTime(65.8, time + 1.5);
+        lowpass.frequency.exponentialRampToValueAtTime(160, time + 1.5);
+        lowpass.Q.linearRampToValueAtTime(1.2, time + 1.5);
+        break;
+      case 2: // Selected Productions (Cinema Hall Resonance)
+        osc1.frequency.exponentialRampToValueAtTime(41.2, time + 1.5);
+        osc2.frequency.exponentialRampToValueAtTime(41.6, time + 1.5);
+        lowpass.frequency.exponentialRampToValueAtTime(90, time + 1.5);
+        lowpass.Q.linearRampToValueAtTime(4.0, time + 1.5); // Hollow cinematic resonance
+        break;
+      case 3: // Playground (AI ML B-Roll)
+        osc1.frequency.exponentialRampToValueAtTime(82.4, time + 1.5);
+        osc2.frequency.exponentialRampToValueAtTime(83.0, time + 1.5);
+        lowpass.frequency.exponentialRampToValueAtTime(300, time + 1.5);
+        lowpass.Q.linearRampToValueAtTime(0.5, time + 1.5);
+        break;
+      case 4: // Archive Credits
+        osc1.frequency.exponentialRampToValueAtTime(55.0, time + 1.5);
+        osc2.frequency.exponentialRampToValueAtTime(55.4, time + 1.5);
+        lowpass.frequency.exponentialRampToValueAtTime(120, time + 1.5);
+        lowpass.Q.linearRampToValueAtTime(1.0, time + 1.5);
+        break;
+      case 5: // Signal Contact
+        osc1.frequency.exponentialRampToValueAtTime(48.9, time + 1.5);
+        osc2.frequency.exponentialRampToValueAtTime(49.3, time + 1.5);
+        lowpass.frequency.exponentialRampToValueAtTime(110, time + 1.5);
+        lowpass.Q.linearRampToValueAtTime(1.5, time + 1.5);
+        break;
+    }
+  } catch (err) {
+    console.warn("AudioEngine: Morph hum failed:", err);
+  }
 }
 
 // Subscribe modular actions to global EventBus
@@ -419,6 +596,7 @@ export function initAudioEngine() {
   
   eventBus.on('audio:play-click', () => playClick());
   eventBus.on('audio:play-swoosh', () => playSwoosh());
+  eventBus.on('audio:play-glitch', () => playGlitchSweep());
   
   eventBus.on('audio:start-static', () => startStaticNoise());
   eventBus.on('audio:stop-static', () => stopStaticNoise());
@@ -426,4 +604,7 @@ export function initAudioEngine() {
   eventBus.on('audio:start-kochi', () => startKochiClimate());
   eventBus.on('audio:start-london', () => startLondonClimate());
   eventBus.on('audio:stop-climate', () => stopClimateAudio());
+  
+  // Register dynamic hum soundscape morphing triggers
+  eventBus.on('audio:morph-hum', (sceneIndex) => morphAmbientHum(sceneIndex));
 }
