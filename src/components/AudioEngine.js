@@ -23,48 +23,48 @@ function initAudio() {
     startAmbientHum();
     
     if (soundEnabled && masterGain) {
-      masterGain.gain.linearRampToValueAtTime(0.35, audioCtx.currentTime + 2.5);
+      masterGain.gain.linearRampToValueAtTime(0.15, audioCtx.currentTime + 2.5); // Softer master fade-in
     }
   } catch (e) {
     console.warn("Web Audio API not supported or blocked by browser policies.", e);
   }
 }
 
-// Low frequency breathing space hum generator
+// Low frequency breathing space hum generator (Whisper-quiet sub-bass atmospheric texture)
 function startAmbientHum() {
   if (!audioCtx) return;
 
   const osc1 = audioCtx.createOscillator();
   osc1.type = 'sine';
-  osc1.frequency.setValueAtTime(55.0, audioCtx.currentTime);
+  osc1.frequency.setValueAtTime(36.7, audioCtx.currentTime); // Very warm D1 sub-bass tone
   
   const osc2 = audioCtx.createOscillator();
   osc2.type = 'sine';
-  osc2.frequency.setValueAtTime(55.4, audioCtx.currentTime);
+  osc2.frequency.setValueAtTime(37.0, audioCtx.currentTime); // Subtle sub-bass beating
   
   const osc3 = audioCtx.createOscillator();
-  osc3.type = 'triangle';
-  osc3.frequency.setValueAtTime(82.4, audioCtx.currentTime);
+  osc3.type = 'sine'; // pure sine to remove annoying harmonic overtones
+  osc3.frequency.setValueAtTime(55.0, audioCtx.currentTime); // Soft low-bass anchor
   
   const lowpass = audioCtx.createBiquadFilter();
   lowpass.type = 'lowpass';
-  lowpass.frequency.setValueAtTime(120, audioCtx.currentTime);
+  lowpass.frequency.setValueAtTime(75, audioCtx.currentTime); // Deep filter cutoff to keep it atmospheric
   lowpass.Q.setValueAtTime(1.0, audioCtx.currentTime);
 
   const osc1Gain = audioCtx.createGain();
-  osc1Gain.gain.setValueAtTime(0.5, audioCtx.currentTime);
+  osc1Gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
   
   const osc2Gain = audioCtx.createGain();
-  osc2Gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+  osc2Gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
   
   const osc3Gain = audioCtx.createGain();
-  osc3Gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+  osc3Gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
 
   const lfo = audioCtx.createOscillator();
-  lfo.frequency.setValueAtTime(0.12, audioCtx.currentTime); // 12 seconds per cycle
+  lfo.frequency.setValueAtTime(0.10, audioCtx.currentTime); // 10 seconds per breathing cycle
   
   const lfoGain = audioCtx.createGain();
-  lfoGain.gain.setValueAtTime(15, audioCtx.currentTime); // Modulate filter cutoff by 15Hz
+  lfoGain.gain.setValueAtTime(8, audioCtx.currentTime); // Gentle cutoff swell modulation
   
   osc1.connect(osc1Gain);
   osc2.connect(osc2Gain);
@@ -82,10 +82,10 @@ function startAmbientHum() {
   const lfoVol = audioCtx.createOscillator();
   lfoVol.frequency.setValueAtTime(0.08, audioCtx.currentTime);
   const lfoVolGain = audioCtx.createGain();
-  lfoVolGain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+  lfoVolGain.gain.setValueAtTime(0.05, audioCtx.currentTime); // Extremely soft volume breathing swells
   
   const humVolumeGain = audioCtx.createGain();
-  humVolumeGain.gain.setValueAtTime(0.35, audioCtx.currentTime);
+  humVolumeGain.gain.setValueAtTime(0.02, audioCtx.currentTime); // Whisper-quiet baseline presence (was 0.35)
   
   lfoVol.connect(lfoVolGain);
   lfoVolGain.connect(humVolumeGain.gain);
@@ -500,7 +500,7 @@ export function toggleMasterSound(btn) {
     
     if (masterGain) {
       masterGain.gain.setValueAtTime(0.0, audioCtx.currentTime);
-      masterGain.gain.linearRampToValueAtTime(0.35, audioCtx.currentTime + 0.8);
+      masterGain.gain.linearRampToValueAtTime(0.15, audioCtx.currentTime + 0.8); // Softer master fade-in
     }
     
     // Broadcast active status
@@ -521,7 +521,7 @@ export function toggleMasterSound(btn) {
   playClick();
 }
 
-// Smooth ambient synthesizer parameters morphing on scene scrolls
+// Smooth ambient synthesizer parameters morphing on scene scrolls (tuned to sub-bass)
 function morphAmbientHum(sceneIndex) {
   if (!audioCtx || !ambientHumNode || !soundEnabled) return;
   
@@ -537,40 +537,40 @@ function morphAmbientHum(sceneIndex) {
   
   try {
     switch (sceneIndex) {
-      case 0: // Hero
-        osc1.frequency.exponentialRampToValueAtTime(55.0, time + 1.5);
-        osc2.frequency.exponentialRampToValueAtTime(55.4, time + 1.5);
-        lowpass.frequency.exponentialRampToValueAtTime(120, time + 1.5);
+      case 0: // Hero (D1 sub-bass)
+        osc1.frequency.exponentialRampToValueAtTime(36.7, time + 1.5);
+        osc2.frequency.exponentialRampToValueAtTime(37.0, time + 1.5);
+        lowpass.frequency.exponentialRampToValueAtTime(75, time + 1.5);
         lowpass.Q.linearRampToValueAtTime(1.0, time + 1.5);
         break;
       case 1: // About (Kochi-London Narrative)
-        osc1.frequency.exponentialRampToValueAtTime(65.4, time + 1.5);
-        osc2.frequency.exponentialRampToValueAtTime(65.8, time + 1.5);
-        lowpass.frequency.exponentialRampToValueAtTime(160, time + 1.5);
+        osc1.frequency.exponentialRampToValueAtTime(43.6, time + 1.5);
+        osc2.frequency.exponentialRampToValueAtTime(44.0, time + 1.5);
+        lowpass.frequency.exponentialRampToValueAtTime(90, time + 1.5);
         lowpass.Q.linearRampToValueAtTime(1.2, time + 1.5);
         break;
-      case 2: // Selected Productions (Cinema Hall Resonance)
-        osc1.frequency.exponentialRampToValueAtTime(41.2, time + 1.5);
-        osc2.frequency.exponentialRampToValueAtTime(41.6, time + 1.5);
-        lowpass.frequency.exponentialRampToValueAtTime(90, time + 1.5);
-        lowpass.Q.linearRampToValueAtTime(4.0, time + 1.5); // Hollow cinematic resonance
+      case 2: // Selected Productions (Cinema Hall Resonance - extremely deep A0)
+        osc1.frequency.exponentialRampToValueAtTime(27.5, time + 1.5);
+        osc2.frequency.exponentialRampToValueAtTime(27.8, time + 1.5);
+        lowpass.frequency.exponentialRampToValueAtTime(55, time + 1.5);
+        lowpass.Q.linearRampToValueAtTime(2.5, time + 1.5); // Hollow cinematic resonance
         break;
       case 3: // Playground (AI ML B-Roll)
-        osc1.frequency.exponentialRampToValueAtTime(82.4, time + 1.5);
-        osc2.frequency.exponentialRampToValueAtTime(83.0, time + 1.5);
-        lowpass.frequency.exponentialRampToValueAtTime(300, time + 1.5);
+        osc1.frequency.exponentialRampToValueAtTime(48.9, time + 1.5);
+        osc2.frequency.exponentialRampToValueAtTime(49.3, time + 1.5);
+        lowpass.frequency.exponentialRampToValueAtTime(120, time + 1.5);
         lowpass.Q.linearRampToValueAtTime(0.5, time + 1.5);
         break;
       case 4: // Archive Credits
-        osc1.frequency.exponentialRampToValueAtTime(55.0, time + 1.5);
-        osc2.frequency.exponentialRampToValueAtTime(55.4, time + 1.5);
-        lowpass.frequency.exponentialRampToValueAtTime(120, time + 1.5);
+        osc1.frequency.exponentialRampToValueAtTime(36.7, time + 1.5);
+        osc2.frequency.exponentialRampToValueAtTime(37.0, time + 1.5);
+        lowpass.frequency.exponentialRampToValueAtTime(75, time + 1.5);
         lowpass.Q.linearRampToValueAtTime(1.0, time + 1.5);
         break;
       case 5: // Signal Contact
-        osc1.frequency.exponentialRampToValueAtTime(48.9, time + 1.5);
-        osc2.frequency.exponentialRampToValueAtTime(49.3, time + 1.5);
-        lowpass.frequency.exponentialRampToValueAtTime(110, time + 1.5);
+        osc1.frequency.exponentialRampToValueAtTime(32.7, time + 1.5);
+        osc2.frequency.exponentialRampToValueAtTime(33.0, time + 1.5);
+        lowpass.frequency.exponentialRampToValueAtTime(70, time + 1.5);
         lowpass.Q.linearRampToValueAtTime(1.5, time + 1.5);
         break;
     }
@@ -586,7 +586,7 @@ export function initAudioEngine() {
     initAudio();
     if (masterGain) {
       masterGain.gain.setValueAtTime(0.0, audioCtx.currentTime);
-      masterGain.gain.linearRampToValueAtTime(0.35, audioCtx.currentTime + 0.8);
+      masterGain.gain.linearRampToValueAtTime(0.15, audioCtx.currentTime + 0.8); // Softer master fade-in
     }
     
     // Synchronize the header lever switch element visually
