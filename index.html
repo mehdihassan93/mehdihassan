@@ -118,6 +118,8 @@
   
   <!-- 20s Idle CRT TV Static Hiss Overlay -->
   <div class="tv-static" id="static-screen">
+    <!-- CRT Glass Glare Overlay -->
+    <div class="crt-glare pointer-events-none z-40"></div>
     <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-50 px-4">
       <div class="p-8 glass-panel border border-outline-variant/30 text-center max-w-md">
         <h2 class="font-mono text-primary text-xl uppercase tracking-widest mb-4">FEED DISCONNECTED</h2>
@@ -166,7 +168,9 @@
 
   <!-- Interactive Terminal Specs Simulator (404 Viewport Core) -->
   <div class="fixed inset-0 z-[9980] hidden flex items-center justify-center p-6 bg-background/95 backdrop-blur-md" id="terminal-viewport">
-    <div class="w-full max-w-2xl terminal-screen text-xs border border-outline-variant/30 flex flex-col gap-6">
+    <div class="w-full max-w-2xl terminal-screen text-xs border border-outline-variant/30 flex flex-col gap-6 relative overflow-hidden">
+      <!-- CRT Screen Glare & Refraction Layer -->
+      <div class="crt-glare pointer-events-none"></div>
       <div class="flex justify-between items-center border-b border-outline-variant/20 pb-4 font-mono">
         <span class="text-primary uppercase font-bold">TERMINAL // SYSTEM_SPECS_LOG</span>
         <button class="text-on-surface-variant hover:text-primary hover:scale-110 font-bold transition-all text-sm" id="terminal-close">[X] CLOSE FEED</button>
@@ -239,11 +243,15 @@
     
     <!-- Diegetic sound toggle console button -->
     <div class="flex items-center gap-4">
-      <button class="lever-btn px-4 py-2 flex items-center gap-3 border rounded-full font-mono text-[10px] glass-panel" id="sound-toggle" aria-label="Toggle atmospheric sound effects">
-        <div class="indicator-light"></div>
-        <span class="material-symbols-outlined text-[14px]">volume_off</span>
-        <span class="hidden md:inline font-mono tracking-widest">CONSOLE SOUND</span>
-      </button>
+      <div class="flex items-center gap-3 glass-panel px-4 py-2 border border-outline-variant/20 rounded-full font-mono text-[9px] tracking-widest uppercase">
+        <span class="hidden sm:inline text-on-surface-variant/70">Soundscape</span>
+        <button id="sound-toggle" class="relative w-12 h-6 bg-[#080f13] border border-outline-variant/40 rounded-full transition-all duration-300 focus:outline-none" aria-label="Toggle atmospheric sound effects">
+          <div class="absolute top-[2px] left-[2px] w-[18px] h-[18px] bg-[#333a3f] border border-outline-variant/50 rounded-full transition-all duration-300 transform flex items-center justify-center shadow-md" id="sound-toggle-handle">
+            <div class="w-[2px] h-2 bg-[#ffba20]/50 rounded-full"></div>
+          </div>
+          <div class="absolute right-[6px] top-[9px] w-[5px] h-[5px] rounded-full bg-[#1a1510] transition-all duration-300" id="sound-toggle-light"></div>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -384,7 +392,11 @@
         </div>
 
         <!-- Horizontal Scroller Wrapper -->
-        <div class="reel-wrapper" id="works-scroller">
+        <div class="relative w-full overflow-hidden border-y border-outline-variant/15 rounded-md py-4 bg-[#070b0d]">
+          <!-- Parallax sprocket holes track (scrolling animation) -->
+          <div class="film-sprockets top-0"></div>
+          
+          <div class="reel-wrapper" id="works-scroller">
           
           <!-- Project 01: Flyinbird London -->
           <div class="reel-panel flex flex-col md:flex-row gap-12 items-center p-4">
@@ -533,6 +545,8 @@
             </div>
           </div>
           
+          <!-- Bottom Film Sprockets track -->
+          <div class="film-sprockets bottom-0"></div>
         </div>
       </div>
     </section>

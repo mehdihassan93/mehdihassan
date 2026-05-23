@@ -372,12 +372,9 @@ function stopClimateAudio() {
 // Master Mute/Unmute Control
 export function toggleMasterSound(btn) {
   soundEnabled = !soundEnabled;
-  const indicator = btn.querySelector('.indicator-light');
-  const icon = btn.querySelector('span.material-symbols-outlined');
   
   if (soundEnabled) {
-    if (indicator) indicator.classList.add('active');
-    if (icon) icon.textContent = 'volume_up';
+    btn.classList.add('sound-active');
     
     // Unlock Audio Context
     if (audioCtx && audioCtx.state === 'suspended') {
@@ -393,8 +390,7 @@ export function toggleMasterSound(btn) {
     // Broadcast active status
     eventBus.emit('sound:state', { enabled: true });
   } else {
-    if (indicator) indicator.classList.remove('active');
-    if (icon) icon.textContent = 'volume_off';
+    btn.classList.remove('sound-active');
     
     if (masterGain) {
       masterGain.gain.setValueAtTime(masterGain.gain.value, audioCtx.currentTime);
@@ -415,6 +411,10 @@ export function initAudioEngine() {
       masterGain.gain.setValueAtTime(0.0, audioCtx.currentTime);
       masterGain.gain.linearRampToValueAtTime(0.35, audioCtx.currentTime + 0.8);
     }
+    
+    // Synchronize the header lever switch element visually
+    const toggle = document.getElementById('sound-toggle');
+    if (toggle) toggle.classList.add('sound-active');
   });
   
   eventBus.on('audio:play-click', () => playClick());

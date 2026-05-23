@@ -239,5 +239,11 @@ export function initWorksReel() {
     
     const colors = ['#0d1418', '#0b161f', '#091811', '#140c14'];
     document.body.style.backgroundColor = colors[currentScene] || '#0d1418';
+    
+    // Dynamic film sprocket sliding parallax effect
+    const sprockets = document.querySelectorAll('.film-sprockets');
+    sprockets.forEach(sprocket => {
+      sprocket.style.transform = `translate3d(${-scrollPos * 0.45}px, 0, 0)`;
+    });
   }));
 }

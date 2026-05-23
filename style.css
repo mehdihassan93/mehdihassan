@@ -417,13 +417,125 @@ section.scene-container {
 }
 
 /* 404 Viewport Screen */
+/* 404 Viewport Screen with curved CRT scanlines */
 .terminal-screen {
-  background: #06090c;
+  position: relative;
+  background: #05080b;
   border: 1px solid var(--color-outline-variant);
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 4px 24px rgba(0,0,0,0.5);
+  box-shadow: inset 0 0 40px rgba(0,0,0,1), 0 8px 32px rgba(0,0,0,0.6);
   font-family: var(--font-mono);
-  padding: 24px;
-  border-radius: 4px;
+  padding: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.terminal-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.15) 50%
+  );
+  background-size: 100% 3px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* CRT Glass Glare Refraction Overlay */
+.crt-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 15%,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.0) 70%
+  ), linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.0) 40%,
+    rgba(0, 0, 0, 0.25) 40%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.7);
+  z-index: 5;
+}
+
+/* Custom 3D Lever Toggle Switch */
+#sound-toggle {
+  position: relative;
+  width: 48px;
+  height: 24px;
+  background-color: #06090b;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+#sound-toggle-handle {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle at 35% 35%, #5a646e 0%, #2a3136 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease;
+}
+
+#sound-toggle-light {
+  position: absolute;
+  right: 6px;
+  top: 9px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #1a1510;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+}
+
+#sound-toggle.sound-active {
+  border-color: rgba(255, 186, 32, 0.4);
+  background-color: rgba(255, 186, 32, 0.04);
+}
+
+#sound-toggle.sound-active #sound-toggle-handle {
+  transform: translate3d(24px, 0, 0);
+  border-color: var(--color-surface-tint);
+  background: radial-gradient(circle at 35% 35%, #7a633a 0%, #4f3d1e 100%);
+}
+
+#sound-toggle.sound-active #sound-toggle-light {
+  background-color: #ffba20;
+  box-shadow: 0 0 8px #ffba20, 0 0 2px #ffdca1;
+}
+
+/* Film Sprocket Sliding Tracks */
+.film-sprockets {
+  position: absolute;
+  left: -20%;
+  width: 240%; /* Generous margin for slide boundaries */
+  height: 10px;
+  background-image: radial-gradient(circle, #080f13 45%, transparent 55%);
+  background-size: 20px 10px;
+  background-repeat: repeat-x;
+  opacity: 0.35;
+  z-index: 20;
+  pointer-events: none;
+  transition: transform 0.1s ease-out; /* Super smooth scrolling momentum */
+}
+
+.film-sprockets.top-0 {
+  top: 4px;
+}
+
+.film-sprockets.bottom-0 {
+  bottom: 4px;
 }
 
 /* Blinking Monospace Cursor */
