@@ -681,8 +681,225 @@ section.scene-container {
   }
   
   .credit-row {
-    flex-direction: column;
-    gap: 4px;
     align-items: flex-start;
   }
+}
+
+/* ==========================================================================
+   IMMERSIVE EASTER EGGS AND CREATIVE THEMES OVERRIDES
+   ========================================================================== */
+
+/* 1. Strange Man Cabin Silhouette Overlay (RDR2) */
+.strange-man-silhouette {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 380px;
+  background: radial-gradient(ellipse at bottom, rgba(8, 15, 19, 0.98), transparent 70%);
+  clip-path: polygon(50% 0%, 30% 20%, 35% 35%, 15% 45%, 25% 90%, 75% 90%, 85% 45%, 65% 35%, 70% 20%);
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  z-index: 45;
+  filter: blur(4px);
+}
+
+.tv-static.active:hover .strange-man-silhouette {
+  animation: strange-flicker 5s infinite;
+}
+
+@keyframes strange-flicker {
+  0%, 100% { opacity: 0; }
+  12%, 18% { opacity: 0.32; filter: blur(3px) brightness(1.25); }
+  15% { opacity: 0.05; }
+  45%, 55% { opacity: 0.38; filter: blur(4px); }
+  48% { opacity: 0.12; }
+}
+
+/* 2. Micro-Styling for Swiftian Cipher Letters */
+.cipher-char {
+  font-weight: bold;
+  letter-spacing: -0.015em;
+  color: inherit;
+  transition: text-shadow 0.4s ease, color 0.4s ease;
+  display: inline;
+}
+
+.cipher-solved .cipher-char {
+  color: var(--color-primary) !important;
+  text-shadow: 0 0 10px var(--color-primary-fixed-dim);
+}
+
+/* 3. Arthur Morgan's Journal Parchment Sketchbook Mode (RDR2) */
+.journal-mode {
+  --color-background: #f4ebd0 !important;
+  --color-surface: #efe2be !important;
+  --color-on-surface: #2b2319 !important;
+  --color-on-surface-variant: #524432 !important;
+  --color-primary: #8a251b !important;
+  --color-outline: #aa9c83 !important;
+  --color-outline-variant: rgba(138, 37, 27, 0.2) !important;
+  --color-surface-tint: #8a251b !important;
+}
+
+.journal-mode body,
+.journal-mode #cold-open-loader {
+  background-color: #f4ebd0 !important;
+  background-image: radial-gradient(rgba(43, 35, 25, 0.05) 1px, transparent 0) !important;
+  background-size: 24px 24px !important;
+  color: #2b2319 !important;
+  font-family: 'Georgia', serif !important;
+}
+
+.journal-mode .lens-focused-panel,
+.journal-mode .glass-panel,
+.journal-mode .lever-btn,
+.journal-mode img {
+  filter: url(#charcoal-sketch) sepia(0.2) contrast(0.95) !important;
+  border-color: #524432 !important;
+  background: rgba(239, 226, 190, 0.55) !important;
+  box-shadow: none !important;
+  border-radius: 4px !important;
+}
+
+.journal-mode .tech-tag {
+  background: #efe2be !important;
+  border-color: #aa9c83 !important;
+  color: #2b2319 !important;
+}
+
+/* 4. Reputation Era Monochrome Goth Theme (Taylor Swift) */
+.reputation-era {
+  --color-background: #050505 !important;
+  --color-surface: #0a0a0a !important;
+  --color-on-surface: #ffffff !important;
+  --color-on-surface-variant: #aaaaaa !important;
+  --color-primary: #ffffff !important;
+  --color-surface-tint: #ff0033 !important;
+}
+
+.reputation-era body {
+  background-color: #050505 !important;
+  color: #ffffff !important;
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+.reputation-era .glass-panel {
+  background: rgba(10, 10, 10, 0.85) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: none !important;
+}
+
+/* 5. Lover Era Pastel Sunset Glow Theme (Taylor Swift) */
+.lover-era {
+  --color-background: #ffd6e0 !important;
+  --color-surface: #ffd6e0 !important;
+  --color-on-surface: #4a344a !important;
+  --color-on-surface-variant: #6b526d !important;
+  --color-primary: #a18cd1 !important;
+  --color-surface-tint: #fbc2eb !important;
+}
+
+.lover-era body {
+  background: linear-gradient(135deg, #ffd6e0 0%, #fbc2eb 50%, #a18cd1 100%) !important;
+  color: #4a344a !important;
+}
+
+.lover-era .glass-panel {
+  background: rgba(255, 214, 224, 0.45) !important;
+  border-color: rgba(161, 140, 209, 0.3) !important;
+  color: #4a344a !important;
+}
+
+.lover-era h1, .lover-era h2, .lover-era .tech-tag {
+  color: #4a344a !important;
+  text-shadow: 0 0 15px rgba(251, 194, 235, 0.6) !important;
+}
+
+/* 6. Midnights Era Retro 1970s Vinyl Theme (Taylor Swift) */
+.midnights-era {
+  --color-background: #0d121d !important;
+  --color-surface: #141b2b !important;
+  --color-on-surface: #ebd4b0 !important;
+  --color-on-surface-variant: #a0a6b5 !important;
+  --color-primary: #e6a15c !important;
+  --color-surface-tint: #e6a15c !important;
+}
+
+.midnights-era body {
+  background-color: #0d121d !important;
+  color: #ebd4b0 !important;
+}
+
+.midnights-era .glass-panel {
+  background: rgba(20, 27, 43, 0.75) !important;
+  border-color: rgba(230, 161, 92, 0.25) !important;
+}
+
+/* 7. Cardigan Era Warm Cozy Thermal Theme & Threads (Taylor Swift) */
+.cardigan-mode {
+  --color-background: #192017 !important;
+  --color-surface: #20291e !important;
+  --color-on-surface: #f3edd9 !important;
+  --color-on-surface-variant: #dcd6be !important;
+  --color-primary: #d4bc72 !important;
+  --color-surface-tint: #d4bc72 !important;
+}
+
+.cardigan-mode body {
+  background-color: #192017 !important;
+  color: #f3edd9 !important;
+}
+
+.cardigan-wool-thread {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #d4bc72;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.65;
+  filter: blur(1.5px);
+  z-index: 9998;
+  box-shadow: 0 0 8px #d4bc72;
+}
+
+/* 8. Lemoyne Ghost Train tracks overlay (RDR2) */
+.ghost-tracks {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-image: repeating-linear-gradient(90deg, transparent, transparent 18px, var(--color-primary) 18px, var(--color-primary) 22px);
+  border-top: 2px dashed var(--color-primary);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity 1.5s ease;
+}
+
+.ghost-tracks.active {
+  opacity: 0.25;
+}
+
+/* 9. Volumetric dust storm particle sweeps (RDR2) */
+.sandstorm-particle {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 186, 32, 0.24);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(1px);
+  z-index: 9997;
+  animation: sand-sweep linear infinite;
+}
+
+@keyframes sand-sweep {
+  0% { transform: translate3d(100vw, var(--start-y), 0) scale(1); opacity: 0; }
+  12% { opacity: 0.85; }
+  88% { opacity: 0.85; }
+  100% { transform: translate3d(-20vw, var(--end-y), 0) scale(1.6); opacity: 0; }
 }

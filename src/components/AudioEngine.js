@@ -6,6 +6,8 @@ let ambientHumNode = null;
 let staticNode = null;
 let climateOscNode = null;
 let climateRainNode = null;
+let vinylNode = null;
+let sandstormNode = null;
 let soundEnabled = false;
 
 // Initialize Web Audio API Synthesizer
@@ -485,6 +487,249 @@ function playGlitchSweep() {
   };
 }
 
+// Procedural creepy echo swell synthesizer (RDR2 Strange Man Reflection)
+function playEerieSweep() {
+  if (!audioCtx || !soundEnabled || audioCtx.state === 'suspended') return;
+  
+  const time = audioCtx.currentTime;
+  const osc1 = audioCtx.createOscillator();
+  const osc2 = audioCtx.createOscillator();
+  const filter = audioCtx.createBiquadFilter();
+  const gain = audioCtx.createGain();
+  
+  osc1.type = 'sawtooth';
+  osc1.frequency.setValueAtTime(45.0, time);
+  osc1.frequency.exponentialRampToValueAtTime(110.0, time + 2.0);
+  
+  osc2.type = 'sine';
+  osc2.frequency.setValueAtTime(45.3, time);
+  osc2.frequency.exponentialRampToValueAtTime(110.6, time + 2.0);
+  
+  filter.type = 'bandpass';
+  filter.Q.setValueAtTime(6.0, time);
+  filter.frequency.setValueAtTime(90, time);
+  filter.frequency.exponentialRampToValueAtTime(280, time + 2.0);
+  
+  gain.gain.setValueAtTime(0.0, time);
+  gain.gain.linearRampToValueAtTime(0.12, time + 0.6);
+  gain.gain.exponentialRampToValueAtTime(0.0001, time + 2.4);
+  
+  osc1.connect(filter);
+  osc2.connect(filter);
+  filter.connect(gain);
+  gain.connect(masterGain);
+  
+  osc1.start(time);
+  osc2.start(time);
+  osc1.stop(time + 2.5);
+  osc2.stop(time + 2.5);
+  
+  osc1.onended = () => {
+    osc1.disconnect();
+    osc2.disconnect();
+    filter.disconnect();
+    gain.disconnect();
+  };
+}
+
+// Shimmering Major-Chord Cipher Chime (Taylor Swift Vault Solved)
+function playChime() {
+  if (!audioCtx || !soundEnabled || audioCtx.state === 'suspended') return;
+  
+  const time = audioCtx.currentTime;
+  // Frequencies of a perfect, magical C-major triad (C5, E5, G5, C6)
+  const freqs = [523.25, 659.25, 783.99, 1046.50];
+  
+  freqs.forEach((freq, idx) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, time);
+    
+    // Spread the note start times slightly to simulate an arpeggiated sweep
+    const noteStart = time + (idx * 0.06);
+    
+    gain.gain.setValueAtTime(0.0, time);
+    gain.gain.linearRampToValueAtTime(0.045, noteStart + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, noteStart + 2.2); // long magical ring-out
+    
+    osc.connect(gain);
+    gain.connect(masterGain);
+    
+    osc.start(noteStart);
+    osc.stop(noteStart + 2.3);
+    
+    osc.onended = () => {
+      osc.disconnect();
+      gain.disconnect();
+    };
+  });
+}
+
+// Procedural loopable vinyl record crackle noise generator (Taylor Swift Midnights)
+function startVinylCrackle() {
+  if (!audioCtx || !soundEnabled || vinylNode) return;
+  
+  try {
+    const bufferSize = audioCtx.sampleRate * 2.0; // 2 seconds loop
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    
+    // Generate baseline vinyl floor rumble/hiss
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * 0.015;
+    }
+    
+    const noise = audioCtx.createBufferSource();
+    noise.buffer = buffer;
+    noise.loop = true;
+    
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(350, audioCtx.currentTime);
+    filter.Q.setValueAtTime(0.4, audioCtx.currentTime);
+    
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0.0, audioCtx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.045, audioCtx.currentTime + 1.2);
+    
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(masterGain);
+    
+    noise.start(0);
+    
+    // Generate random high-frequency micro-crackle spikes
+    let crackleInterval = setInterval(() => {
+      if (!audioCtx || !soundEnabled || audioCtx.state === 'suspended') return;
+      if (Math.random() > 0.5) {
+        const time = audioCtx.currentTime;
+        const spike = audioCtx.createOscillator();
+        const spikeGain = audioCtx.createGain();
+        
+        spike.type = 'triangle';
+        spike.frequency.setValueAtTime(6000 + Math.random() * 4000, time);
+        
+        spikeGain.gain.setValueAtTime(0.03, time);
+        spikeGain.gain.exponentialRampToValueAtTime(0.0001, time + 0.005); // micro decay click
+        
+        spike.connect(spikeGain);
+        spikeGain.connect(masterGain);
+        
+        spike.start(time);
+        spike.stop(time + 0.01);
+        
+        spike.onended = () => {
+          spike.disconnect();
+          spikeGain.disconnect();
+        };
+      }
+    }, 180);
+    
+    vinylNode = { noise, filter, gain, crackleInterval };
+  } catch (err) {}
+}
+
+function stopVinylCrackle() {
+  if (!audioCtx || !vinylNode) return;
+  
+  clearInterval(vinylNode.crackleInterval);
+  
+  const activeGain = vinylNode.gain;
+  const activeNoise = vinylNode.noise;
+  const activeFilter = vinylNode.filter;
+  
+  try {
+    activeGain.gain.setValueAtTime(activeGain.gain.value, audioCtx.currentTime);
+    activeGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.3);
+    
+    setTimeout(() => {
+      try {
+        activeNoise.stop();
+        activeNoise.disconnect();
+        activeFilter.disconnect();
+        activeGain.disconnect();
+      } catch (e) {}
+    }, 350);
+  } catch (err) {}
+  vinylNode = null;
+}
+
+// Procedural loopable sandstorm blowing wind sweeps (RDR2 Desert Sandstorm)
+function startSandstormAudio() {
+  if (!audioCtx || !soundEnabled || sandstormNode) return;
+  
+  try {
+    const bufferSize = audioCtx.sampleRate * 2.0; // 2 seconds loop
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+    
+    const noise = audioCtx.createBufferSource();
+    noise.buffer = buffer;
+    noise.loop = true;
+    
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.Q.setValueAtTime(3.5, audioCtx.currentTime);
+    filter.frequency.setValueAtTime(250, audioCtx.currentTime);
+    
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0.0, audioCtx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 1.0); // soft entry
+    
+    // Slow, organic breathing LFO to sweep the sandstorm wind cutoff frequency
+    const lfo = audioCtx.createOscillator();
+    const lfoGain = audioCtx.createGain();
+    lfo.type = 'sine';
+    lfo.frequency.setValueAtTime(0.05, audioCtx.currentTime); // 20s cycle
+    lfoGain.gain.setValueAtTime(180, audioCtx.currentTime); // sweep range +- 180Hz
+    
+    lfo.connect(lfoGain);
+    lfoGain.connect(filter.frequency);
+    
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(masterGain);
+    
+    noise.start(0);
+    lfo.start(0);
+    
+    sandstormNode = { noise, filter, gain, lfo, lfoGain };
+  } catch (err) {}
+}
+
+function stopSandstormAudio() {
+  if (!audioCtx || !sandstormNode) return;
+  
+  const activeGain = sandstormNode.gain;
+  const activeNoise = sandstormNode.noise;
+  const activeFilter = sandstormNode.filter;
+  const activeLfo = sandstormNode.lfo;
+  const activeLfoGain = sandstormNode.lfoGain;
+  
+  try {
+    activeGain.gain.setValueAtTime(activeGain.gain.value, audioCtx.currentTime);
+    activeGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
+    
+    setTimeout(() => {
+      try {
+        activeNoise.stop();
+        activeLfo.stop();
+        activeNoise.disconnect();
+        activeLfo.disconnect();
+        activeLfoGain.disconnect();
+        activeFilter.disconnect();
+        activeGain.disconnect();
+      } catch (e) {}
+    }, 550);
+  } catch (err) {}
+  sandstormNode = null;
+}
+
 // Master Mute/Unmute Control
 export function toggleMasterSound(btn) {
   soundEnabled = !soundEnabled;
@@ -515,8 +760,10 @@ export function toggleMasterSound(btn) {
     
     eventBus.emit('sound:state', { enabled: false });
     
-    // Stop any active telemetry beeps when muted
+    // Stop any active telemetry, vinyl crackle, or sandstorm sweeps when muted
     stopTelemetryBeeps();
+    stopVinylCrackle();
+    stopSandstormAudio();
   }
   playClick();
 }
@@ -597,6 +844,14 @@ export function initAudioEngine() {
   eventBus.on('audio:play-click', () => playClick());
   eventBus.on('audio:play-swoosh', () => playSwoosh());
   eventBus.on('audio:play-glitch', () => playGlitchSweep());
+  eventBus.on('audio:play-eerie', () => playEerieSweep());
+  eventBus.on('audio:play-chime', () => playChime());
+  
+  eventBus.on('audio:start-vinyl', () => startVinylCrackle());
+  eventBus.on('audio:stop-vinyl', () => stopVinylCrackle());
+  
+  eventBus.on('audio:start-sandstorm', () => startSandstormAudio());
+  eventBus.on('audio:stop-sandstorm', () => stopSandstormAudio());
   
   eventBus.on('audio:start-static', () => startStaticNoise());
   eventBus.on('audio:stop-static', () => stopStaticNoise());

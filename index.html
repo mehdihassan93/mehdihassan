@@ -120,6 +120,8 @@
   <div class="tv-static" id="static-screen">
     <!-- CRT Glass Glare Overlay -->
     <div class="crt-glare pointer-events-none z-40"></div>
+    <!-- Strange Man Silhouette (RDR2 Easter Egg) -->
+    <div class="strange-man-silhouette" id="strange-man"></div>
     <div class="absolute inset-0 flex flex-col items-center justify-center text-center z-50 px-4">
       <div class="p-8 glass-panel border border-outline-variant/30 text-center max-w-md">
         <h2 class="font-mono text-primary text-xl uppercase tracking-widest mb-4">FEED DISCONNECTED</h2>
@@ -343,13 +345,13 @@
         
         <div class="space-y-10 font-display text-xl md:text-3xl text-on-surface italic leading-relaxed md:leading-snug">
           <p>
-            It began in the humid, salt-aired streets of <span class="city-kochi not-italic font-bold text-on-surface underline decoration-solid hover:text-primary transition-all cursor-pointer">Kochi</span>. The journey was never about a destination, but a sequence of frames carefully exposed. At <span class="text-primary not-italic font-semibold">APJ Abdul Kalam Technological University</span>, the technical blueprint was drafted—a foundational study of computer logic that would eventually power the mobile systems I sought to build.
+            It began in the humid, salt-aired streets of <span class="city-kochi not-italic font-bold text-on-surface underline decoration-solid hover:text-primary transition-all cursor-pointer"><span class="cipher-char">K</span>ochi</span>. The journey was never about a destination, but a sequen<span class="cipher-char">c</span>e of frames carefully exposed. At <span class="text-primary not-italic font-semibold">APJ Abdul Kalam Te<span class="cipher-char">h</span>nological University</span>, the technical blueprin<span class="cipher-char">t</span> was drafted—a f<span class="cipher-char">o</span>undational study of computer logic that wou<span class="cipher-char">l</span>d eventually power the mobile systems I sought to build.
           </p>
           <p>
-            The first act unfolded at <span class="text-on-surface not-italic font-semibold">EGuidanceLabs</span> in Kerala, where the raw energy of design met the precision of mobile technology. It was here I refined my Flutter craft, establishing scalable foundations that powered regional platforms and modular UI systems.
+            The first act unfol<span class="cipher-char">d</span>ed at <span class="text-on-surface not-italic font-semibold">EGuida<span class="cipher-char">n</span>ceLabs</span> in Kerala, where the raw energy of design met the precision of mobile technology. It was here I de<span class="cipher-char">v</span>eloped my Flutter craft, establishing scalable foundations that powered regional platforms and modular UI systems.
           </p>
           <p>
-            Moving into senior realms took me to <span class="text-on-surface not-italic font-semibold">Aideon Limited</span> in London. The focus tightened, shifting from local grids to cross-platform mobile architectures that prioritized performance, accessibility, and pixel-accurate interface design in complex product ecosystems.
+            Moving into senior realms took me to <span class="text-on-surface not-italic font-semibold"><span class="cipher-char">A</span>ideon Limited</span> in London. The foc<span class="cipher-char">u</span>s tightened, shifting from <span class="cipher-char">l</span>ocal grids to cross-pla<span class="cipher-char">t</span>form mobile architectures that prioritized performance, accessibility, and pixel-accurate interface design in complex product ecosystems.
           </p>
           <p>
             Eventually, the horizon shifted fully to <span class="city-london not-italic font-bold text-on-surface underline decoration-solid hover:text-primary transition-all cursor-pointer">London</span>. Refined by an MSc in Web Development at the <span class="text-primary not-italic font-semibold">University of Roehampton</span>, I currently engineer native Android apps at <span class="text-on-surface not-italic font-semibold font-bold">Flyinbird</span>, shipping core customer-facing features in Kotlin and Jetpack Compose.
@@ -923,6 +925,16 @@
       <span class="font-mono text-[8px] uppercase tracking-wider mt-1">Signal</span>
     </a>
   </nav>
+
+  <!-- Sketchbook Charcoal displacement filters (RDR2 Arthur's Journal) -->
+  <svg class="hidden" width="0" height="0" style="position: absolute; width: 0; height: 0;">
+    <defs>
+      <filter id="charcoal-sketch">
+        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
 
   <!-- Core Javascript Logic -->
   <script type="module" src="src/bootstrap.js"></script>

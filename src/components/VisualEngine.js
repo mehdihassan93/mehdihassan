@@ -59,6 +59,30 @@ export function initCustomCursor() {
       spotlight.style.setProperty('--mouse-x', `${cursorX}px`);
       spotlight.style.setProperty('--mouse-y', `${cursorY}px`);
     }
+
+    // Cardigan Cozy Wool Thread Trail generator (Taylor Swift Easter Egg)
+    if (document.documentElement.classList.contains('cardigan-mode')) {
+      const thread = document.createElement('div');
+      thread.className = 'cardigan-wool-thread';
+      thread.style.left = `${cursorX + window.scrollX}px`;
+      thread.style.top = `${cursorY + window.scrollY}px`;
+      document.body.appendChild(thread);
+      
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 5 + Math.random() * 15;
+      const driftX = Math.cos(angle) * dist;
+      const driftY = Math.sin(angle) * dist;
+      
+      thread.animate([
+        { transform: 'translate3d(0,0,0) scale(1)', opacity: 0.7 },
+        { transform: `translate3d(${driftX}px, ${driftY}px, 0) scale(0.1)`, opacity: 0 }
+      ], {
+        duration: 1000 + Math.random() * 400,
+        easing: 'ease-out'
+      });
+      
+      setTimeout(() => thread.remove(), 1400);
+    }
   });
   
   // Start eased loop
@@ -78,7 +102,12 @@ function setupInteractivesListeners() {
     cursor.style.backgroundColor = 'transparent';
     cursor.style.border = '1px solid var(--color-surface-tint)';
     cursorTrail.style.opacity = '0';
-    eventBus.emit('audio:play-click');
+    
+    if (document.documentElement.classList.contains('cardigan-mode')) {
+      eventBus.emit('audio:play-chime');
+    } else {
+      eventBus.emit('audio:play-click');
+    }
   };
   
   const handleMouseLeave = () => {
@@ -89,7 +118,11 @@ function setupInteractivesListeners() {
   };
   
   const handleClick = () => {
-    eventBus.emit('audio:play-click');
+    if (document.documentElement.classList.contains('cardigan-mode')) {
+      eventBus.emit('audio:play-chime');
+    } else {
+      eventBus.emit('audio:play-click');
+    }
   };
 
   const attachListeners = () => {
@@ -281,6 +314,27 @@ export function initWorksReel() {
     sprockets.forEach(sprocket => {
       sprocket.style.transform = `translate3d(${-scrollPos * 0.45}px, 0, 0)`;
     });
+
+    // Swiftian Track 13 Scroll Vault Trigger (Taylor Swift Easter Egg)
+    if (scrollPos >= 1270 && scrollPos <= 1330 && !document.getElementById('track-13-vault-card')) {
+      eventBus.emit('audio:play-chime');
+      
+      const vaultCard = document.createElement('div');
+      vaultCard.id = 'track-13-vault-card';
+      vaultCard.className = 'absolute top-1/2 left-[1300px] -translate-y-1/2 z-50 p-6 glass-panel border border-primary text-primary font-mono text-[9px] tracking-widest uppercase animate-bounce max-w-[200px] pointer-events-none';
+      vaultCard.innerHTML = `
+        <h3 class="font-bold text-xs mb-2">TRACK 13 VAULT</h3>
+        <p class="leading-relaxed">Secret Track discovered. Type "cardigan" on your keyboard to reveal the cozy thermal golden thread.</p>
+      `;
+      scroller.appendChild(vaultCard);
+      
+      console.log("%c[SWIFTIAN ALIGNMENT: TRACK 13 VAULT DISCOVERED]", "color: #e6a15c; font-weight: bold;");
+      
+      setTimeout(() => {
+        vaultCard.classList.add('transition-all', 'duration-1000', 'opacity-0');
+        setTimeout(() => vaultCard.remove(), 1000);
+      }, 8000);
+    }
   }));
 
   // Implement Custom Drag-and-Throw Inertia Engine

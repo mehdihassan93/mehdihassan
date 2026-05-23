@@ -15,7 +15,8 @@ import {
   initKeyboardTransitEgg,
   initIdleDetector,
   toggleTerminalCore,
-  runTerminalSimulation
+  runTerminalSimulation,
+  checkLunarPhase
 } from './components/ConsoleCore.js';
 import { initFormHandler } from './components/FormHandler.js';
 
@@ -159,6 +160,7 @@ const init = () => {
   setupColdOpen();
   initScrollObserverFallback();
   wireUIEventListeners();
+  checkLunarPhase();
 };
 
 if (document.readyState === 'loading') {

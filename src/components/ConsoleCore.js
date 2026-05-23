@@ -1,13 +1,59 @@
 import { eventBus } from '../utils/EventBus.js';
 import { getElement } from '../utils/Helpers.js';
 
-// World Clocks Updating
+// High-performance astronomical moon phase approximation (RDR2 Easter Egg)
+export function checkLunarPhase() {
+  const now = new Date();
+  let year = now.getFullYear();
+  let month = now.getMonth() + 1;
+  const day = now.getDate();
+  
+  if (month < 3) {
+    year--;
+    month += 12;
+  }
+  const julianDate = Math.floor(365.25 * (year + 4716)) + Math.floor(30.6001 * (month + 1)) + day - 1524.5;
+  const daysSinceNew = (julianDate - 2451550.1) % 29.530588853;
+  const isFullMoon = daysSinceNew >= 13.5 && daysSinceNew <= 16.0;
+  
+  if (isFullMoon) {
+    console.log("%c[LUNAR ALIGNMENT: FULL MOON DETECTED]", "color: #ffdca1; font-weight: bold;");
+    const spotlight = document.getElementById('bg-spotlight');
+    if (spotlight) {
+      spotlight.classList.add('moon-full');
+    }
+  }
+}
+
+// World Clocks Updating with Taylor Swift 13 Clicks Cipher Trigger
 export function startWorldClocks() {
   const kochiClock = getElement('#kochi-time');
   const londonClock = getElement('#london-time');
   
   if (!kochiClock || !londonClock) return;
   
+  // Taylor Swift 13 ciphers click count trigger
+  let clockClicks = 0;
+  const triggerCipherSolving = () => {
+    clockClicks++;
+    eventBus.emit('audio:play-click');
+    if (clockClicks >= 13) {
+      clockClicks = 0;
+      document.documentElement.classList.add('cipher-solved');
+      eventBus.emit('audio:play-chime');
+      
+      const overlay = document.createElement('div');
+      overlay.className = 'fixed top-12 left-1/2 -translate-x-1/2 z-[10000] glass-panel px-6 py-4 border border-primary text-primary font-mono text-[10px] tracking-widest uppercase animate-pulse';
+      overlay.textContent = '>>> CIPHER SOLVED: "KCH-LDN VAULT PROTOCOL UNLOCKED" <<<';
+      document.body.appendChild(overlay);
+      
+      setTimeout(() => overlay.remove(), 4000);
+    }
+  };
+  
+  kochiClock.addEventListener('click', triggerCipherSolving);
+  londonClock.addEventListener('click', triggerCipherSolving);
+
   function tick() {
     const now = new Date();
     const kochiOptions = { timeZone: 'Asia/Kolkata', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
@@ -15,6 +61,15 @@ export function startWorldClocks() {
     
     kochiClock.textContent = new Intl.DateTimeFormat('en-GB', kochiOptions).format(now);
     londonClock.textContent = new Intl.DateTimeFormat('en-GB', londonOptions).format(now);
+    
+    // Taylor Swift "Midnights" 00:00 vault trigger
+    const londonHours = now.getUTCHours() + 1; // London is UTC+1 during BST (May is BST)
+    const currentMin = now.getMinutes();
+    const currentSec = now.getSeconds();
+    
+    if (londonHours % 24 === 0 && currentMin === 0 && currentSec === 0) {
+      triggerMidnightGlitch();
+    }
   }
   
   setInterval(tick, 1000);
@@ -59,19 +114,47 @@ export function initClimateHovers() {
   }
 }
 
-// Transit kch2ldn keyboard combo & triple-tap easter egg
+// Global Immersive Keyboard Combo Buffer Keystroke Router
 export function initKeyboardTransitEgg() {
   let typedBuffer = '';
   
   document.addEventListener('keydown', (e) => {
-    if (!e.key) return;
+    if (!e.key || e.key.length > 1) return; // ignore control keys
     typedBuffer += e.key.toLowerCase();
-    if (typedBuffer.length > 7) {
-      typedBuffer = typedBuffer.substring(typedBuffer.length - 7);
+    
+    // Clamp buffer length to prevent memory bloat (max length 12)
+    if (typedBuffer.length > 12) {
+      typedBuffer = typedBuffer.substring(typedBuffer.length - 12);
     }
     
+    // Keystroke combo routing checks
     if (typedBuffer.includes('kch2ldn')) {
       triggerTransitSequence();
+      typedBuffer = '';
+    } else if (typedBuffer.includes('journal')) {
+      toggleArthurJournalMode();
+      typedBuffer = '';
+    } else if (typedBuffer.includes('reputation')) {
+      toggleTaylorSwiftEra('reputation-era');
+      typedBuffer = '';
+    } else if (typedBuffer.includes('lover')) {
+      toggleTaylorSwiftEra('lover-era');
+      typedBuffer = '';
+    } else if (typedBuffer.includes('midnights')) {
+      toggleTaylorSwiftEra('midnights-era');
+      typedBuffer = '';
+    } else if (typedBuffer.includes('cardigan')) {
+      toggleTaylorSwiftEra('cardigan-mode');
+      typedBuffer = '';
+    } else if (typedBuffer.includes('oracle')) {
+      toggleTerminalCore(true);
+      runOracleCassidySimulation();
+      typedBuffer = '';
+    } else if (typedBuffer.includes('spectre')) {
+      triggerGhostTrain();
+      typedBuffer = '';
+    } else if (typedBuffer.includes('sandstorm')) {
+      toggleSandstorm();
       typedBuffer = '';
     }
   });
@@ -101,6 +184,138 @@ export function initKeyboardTransitEgg() {
       triggerTransitSequence();
     });
   }
+}
+
+// 1. ArthurMorgan sketchbook mode toggle (RDR2)
+function toggleArthurJournalMode() {
+  const root = document.documentElement;
+  const active = root.classList.toggle('journal-mode');
+  eventBus.emit('audio:play-swoosh');
+  console.log(`%c[SKETCHBOOK MODE: ${active ? 'ACTIVE' : 'DEACTIVATED'}]`, "color: #8a251b; font-weight: bold;");
+}
+
+// 2. Taylor Swift Eras toggle switcher
+function toggleTaylorSwiftEra(className) {
+  const root = document.documentElement;
+  const eras = ['reputation-era', 'lover-era', 'midnights-era', 'cardigan-mode'];
+  const wasActive = root.classList.contains(className);
+  
+  eras.forEach(era => root.classList.remove(era));
+  eventBus.emit('audio:stop-vinyl');
+  
+  if (!wasActive) {
+    root.classList.add(className);
+    eventBus.emit('audio:play-click');
+    
+    if (className === 'lover-era') {
+      eventBus.emit('audio:play-chime');
+    } else if (className === 'midnights-era') {
+      eventBus.emit('audio:start-vinyl');
+    } else if (className === 'cardigan-mode') {
+      eventBus.emit('audio:play-chime');
+    } else if (className === 'reputation-era') {
+      eventBus.emit('audio:play-glitch');
+    }
+    console.log(`%c[ERA TRANSFORM: ${className.toUpperCase()} ACTIVE]`, "color: #ffba20; font-weight: bold;");
+  }
+}
+
+// 3. Volumetric sandstorm particle flow toggle (RDR2)
+let sandstormActive = false;
+let sandstormTimer = null;
+
+function toggleSandstorm() {
+  sandstormActive = !sandstormActive;
+  
+  if (sandstormActive) {
+    eventBus.emit('audio:start-sandstorm');
+    eventBus.emit('audio:play-swoosh');
+    
+    sandstormTimer = setInterval(() => {
+      if (!sandstormActive) return;
+      const p = document.createElement('div');
+      p.className = 'sandstorm-particle';
+      p.style.setProperty('--start-y', `${Math.random() * 100}vh`);
+      p.style.setProperty('--end-y', `${Math.random() * 100}vh`);
+      
+      const duration = 2.0 + Math.random() * 2.5;
+      p.style.animationDuration = `${duration}s`;
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), duration * 1000);
+    }, 45);
+    
+    console.log("%c[DESERT WARNING: SANDSTORM ACTIVE]", "color: #ffba20; font-weight: bold;");
+  } else {
+    eventBus.emit('audio:stop-sandstorm');
+    clearInterval(sandstormTimer);
+    sandstormActive = false;
+  }
+}
+
+// 4. Lemoyne Ghost Train tracks overlay (RDR2)
+function triggerGhostTrain() {
+  const scroller = getElement('#works-scroller');
+  if (!scroller) return;
+  
+  eventBus.emit('audio:play-eerie');
+  
+  const tracks = document.createElement('div');
+  tracks.className = 'ghost-tracks';
+  scroller.appendChild(tracks);
+  
+  setTimeout(() => tracks.classList.add('active'), 100);
+  
+  setTimeout(() => {
+    eventBus.emit('audio:play-swoosh');
+  }, 1800);
+  
+  setTimeout(() => {
+    tracks.classList.remove('active');
+    setTimeout(() => tracks.remove(), 1500);
+  }, 10000);
+  
+  console.log("%c[LEMOPYNE SPECTRE: GHOST TRAIN APPROACHING]", "color: #a18cd1; font-weight: bold;");
+}
+
+// 5. Taylor Swift Midnights 00:00 Vault Glitch
+function triggerMidnightGlitch() {
+  eventBus.emit('audio:play-glitch');
+  const staticScreen = getElement('#static-screen');
+  if (staticScreen) {
+    staticScreen.classList.add('active');
+    setTimeout(() => staticScreen.classList.remove('active'), 1200);
+  }
+  toggleTaylorSwiftEra('midnights-era');
+}
+
+// 6. RDR2 Blind Man Cassidy's Oracle Command simulation
+function runOracleCassidySimulation() {
+  const logLines = getElement('#terminal-lines');
+  if (!logLines) return;
+  
+  logLines.innerHTML = '';
+  const prophecies = [
+    'BLIND MAN CASSIDY // THE PROPHET ENTERS THE SPEC CORE...',
+    '“I have no eyes, traveler, but I see you clearly.”',
+    '“A bridge is being built from Kochi to London.”',
+    '“Native Android is the rails, Flutter is the carriage.”',
+    '“The code you write is a map across oceans.”',
+    '“Do not fear the bugs, they are merely guide dogs in the wilderness.”',
+    '“I see a sunset transit... yes, KCH to LDN is written in the sky.”',
+    '“Your signal is strong. Connect to the vault.”'
+  ];
+  
+  let delay = 0;
+  prophecies.forEach((line, index) => {
+    setTimeout(() => {
+      const p = document.createElement('p');
+      p.className = index === 0 ? 'text-primary font-bold' : 'text-primary/75 italic';
+      p.textContent = `> ${line}`;
+      logLines.appendChild(p);
+      eventBus.emit('audio:play-click');
+    }, delay);
+    delay += 550;
+  });
 }
 
 function triggerTransitSequence() {
@@ -199,6 +414,31 @@ export function initIdleDetector() {
     if (staticScreen) {
       staticScreen.classList.add('active');
       eventBus.emit('audio:start-static');
+      
+      // Strange Man cabin mirror reflection RDR2 Easter Egg
+      const strangeMan = getElement('#strange-man');
+      if (strangeMan) {
+        strangeMan.style.opacity = '0.35';
+        
+        const triggerStrangeReflection = () => {
+          console.log("%c[STRANGER LOG: WE HAVE MET BEFORE]", "color: #b0b0b0; font-weight: bold; background: #000; padding: 4px;");
+          eventBus.emit('audio:play-eerie');
+          
+          const logLines = getElement('#terminal-lines');
+          if (logLines) {
+            const p = document.createElement('p');
+            p.className = 'text-error font-mono font-bold animate-pulse';
+            p.textContent = '> STRANGER ENCOUNTER: "I know you. We’ve met before."';
+            logLines.appendChild(p);
+          }
+          
+          strangeMan.removeEventListener('mouseenter', triggerStrangeReflection);
+          strangeMan.removeEventListener('touchstart', triggerStrangeReflection);
+        };
+        
+        strangeMan.addEventListener('mouseenter', triggerStrangeReflection);
+        strangeMan.addEventListener('touchstart', triggerStrangeReflection, { passive: true });
+      }
     }
   }
   
