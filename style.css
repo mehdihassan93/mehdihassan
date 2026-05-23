@@ -903,3 +903,8 @@ section.scene-container {
   88% { opacity: 0.85; }
   100% { transform: translate3d(-20vw, var(--end-y), 0) scale(1.6); opacity: 0; }
 }
+
+/* Journal portrait card display trigger */
+.journal-mode .journal-portrait {
+  display: block !important;
+}
